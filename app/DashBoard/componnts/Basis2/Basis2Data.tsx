@@ -22,7 +22,7 @@ const Basis2Data = () => {
 
   return (
     <div>
-        table
+        data table
     </div>
   )
 }
