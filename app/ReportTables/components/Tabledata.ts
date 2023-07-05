@@ -7,7 +7,7 @@ import { table } from "console";
 
 
 export const TableHeadData = [
-    "Basis 2",
+    "Basis2",
     "INTERFACE",
     "CMS",
     "SPMS",
@@ -15,7 +15,7 @@ export const TableHeadData = [
     "OLD PERPAY",
     "UTILITY MASTER",
     "INTERNET",
-    "Exchange BrowserMail ",
+    "Exchange BrowserMail",
   ];
 
 
@@ -32,7 +32,7 @@ export const TableHeadData = [
     9: "Exchange BrowserMail",
   };
 
-  enum TableName {
+ export enum TableName {
     CMS = "CMS",
     Basis2 = "Basis2",
     INTERFACE = "INTERFACE",
@@ -70,14 +70,14 @@ type TableRow = {
 };
 export const tableData1: TableCell[] = [
   { name: TableName.CMS, value: 1},
-  { name: TableName.Basis2, value: 1 },
+  { name: TableName.Basis2, value: 4 },
   { name: TableName.INTERFACE, value: 3 },
   { name: TableName.SPMS, value: 5 },
   { name: TableName.NEW_PERPAY, value: 4 },
   { name: TableName.OLD_PERPAY, value: 2 },
   { name: TableName.UTILITY_MASTER, value: 4},
   { name: TableName.INTERNET, value: 1 },
-  { name: TableName.Exchange_BrowserMail, value: 3 },
+  { name: TableName.Exchange_BrowserMail, value: 4 },
 ];
 
 export const tableData: TableRow[] = [
