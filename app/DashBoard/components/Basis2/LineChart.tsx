@@ -64,7 +64,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
           cell: cell,
         }));
     });
-    console.log("basis2DataList from tablestore in Linecharts", basis2DataList);
+    // console.log("basis2DataList from tablestore in Linecharts", basis2DataList);
     
 
     return basis2DataList;
@@ -74,7 +74,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
   // console.log(basis2DataList);
   
   useEffect(() => {
-    console.log("time set in the graph", dashboard);
+    // console.log("time set in the graph", dashboard);
       Basis2Data();
   }, [System]);
 
@@ -92,7 +92,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
   // console.log(dataavil);
 
   const data = {
-    labels,
+    labels:labels.map((item) => item.toLocaleLowerCase().slice(5)),
     datasets: [
       {
         label: System,
@@ -107,7 +107,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
  
   return (
     <div className=" mx-auto h-full w-full text-sm overflow-x-scroll">
-      <Line options={options} data={data} />;
+      <Line options={options} data={data} />
     </div>
   );
 };
