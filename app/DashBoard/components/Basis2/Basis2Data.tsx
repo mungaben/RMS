@@ -16,7 +16,7 @@ const Basis2Data = () => {
  
 
   return (
-    <div className=' flex flex-col bg-red-400 p-4 justify-center  space-y-4 mx-auto w-full'>
+    <div className=' flex flex-col justify-center  space-y-4 mx-auto w-full'>
      
       <div className=' w-full flex items-center justify-between  overflow-x-hidden' >
         
@@ -24,7 +24,7 @@ const Basis2Data = () => {
           <TopBar/>
         </div>
       </div>
-      <div className=' flex  md:mt-10 md:bottom-6 border-[1px] shadow-md bg-white p-5 '>
+      <div className=' flex  md:mt-10 md:bottom-6 border-[1px] shadow-md  mr-0 '>
       <LineChart  System={system} />
       </div>
      

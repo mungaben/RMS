@@ -6,7 +6,7 @@ import React from 'react'
 
 const DateSelector = () => {
   return (
-    <div className=' overflow-x-auto max-w-xs'>
+    <div className='  max-w-xs'>
       <DatePickerDemo/>
     </div>
   )

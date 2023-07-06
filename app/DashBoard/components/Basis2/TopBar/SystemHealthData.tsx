@@ -24,7 +24,7 @@ const TopBarHealthData = () => {
             <CardTitle className="text-sm font-medium justify-center flex">{item}</CardTitle>
           </CardHeader> */}
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className=" font-bold">
               <SystemHealth System={item} />
             </div>
           </CardContent>

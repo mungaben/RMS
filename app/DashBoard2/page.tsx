@@ -83,9 +83,7 @@ export default function DashboardPage() {
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2 overflow-scroll ">
-                  
-                      <Basis2Data />
-                   
+                    <Basis2Data />
                   </CardContent>
                 </Card>
                 <Card className="col-span-3  gap-2 overflow-scroll">
