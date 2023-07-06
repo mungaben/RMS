@@ -18,7 +18,7 @@ const Basis2Data = () => {
   return (
     <div className=' flex flex-col bg-red-400 p-4 justify-center  space-y-4 mx-auto w-full'>
      
-      <div className=' w-full flex items-center justify-between ' >
+      <div className=' w-full flex items-center justify-between  overflow-x-hidden' >
         
         <div>
           <TopBar/>

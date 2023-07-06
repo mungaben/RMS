@@ -38,12 +38,12 @@ export function DatePickerDemo() {
           onClick={handleButtonClick}
           variant={"outline"}
           className={cn(
-            "w-[240px] justify-start text-left font-normal",
+            " justify-start text-left font-normal",
             !date && "text-muted-foreground"
           )}
         >
-          <CalendarIcon className="w-4 h-4 mr-2" />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          <CalendarIcon className="" />
+          {date ? format(date, "PPP") : <span>date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
