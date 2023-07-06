@@ -83,7 +83,7 @@ export default function DashboardPage() {
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2 ">
-                    <div className="p-2 overflow-scroll">
+                    <div className="p-2 ">
                       <Basis2Data />
                     </div>
                   </CardContent>

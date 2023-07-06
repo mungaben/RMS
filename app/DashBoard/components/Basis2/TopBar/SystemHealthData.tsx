@@ -17,7 +17,7 @@ type TableHeadData =
 
 const TopBarHealthData = () => {
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 w-full grid-rows-1">
+    <div className="flex overflow-scroll space-x-4 justify-center">
       {TableHeadData?.map((item: TableHeadData, index: number) => (
         <Card className="flex justify-center flex-col" key={index}>
           {/* <CardHeader className="flex flex-row items-center justify-between space-y-0">
