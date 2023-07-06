@@ -2,11 +2,20 @@ import { table } from "console";
 
 
 
+type TableHeadDatas =
+  | "Basis2"
+  | "INTERFACE"
+  | "CMS"
+  | "SPMS"
+  | "NEW PERPAY"
+  | "OLD PERPAY"
+  | "UTILITY MASTER"
+  | "INTERNET"
+  | "Exchange BrowserMail";
 
 
 
-
-export const TableHeadData = [
+export const TableHeadData:TableHeadDatas[] = [
     "Basis2",
     "INTERFACE",
     "CMS",

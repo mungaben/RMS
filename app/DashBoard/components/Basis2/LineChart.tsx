@@ -39,6 +39,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
   
   const fromTimeArray: FromTime[] = Object.values(FromTime);
   const dashboard = useDashboardStore((state) => state.dashboard);
+  const tabledatas=useTableStore((state) => state.tableRowData);
 
   const options = {
     responsive: true,
@@ -55,7 +56,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
 
   const tableData = useTableStore((state) => state.tableRowData);
   const Basis2Data = useCallback(() => {
-    const basis2DataList = tableData.flatMap((item) => {
+    const basis2DataList = tabledatas?.flatMap((item) => {
       return item.cells
         .filter((cell) => cell.name === System)
         .map((cell) => ({
@@ -63,6 +64,8 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
           cell: cell,
         }));
     });
+    console.log("basis2DataList from tablestore in Linecharts", basis2DataList);
+    
 
     return basis2DataList;
   },[System]);

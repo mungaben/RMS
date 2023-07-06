@@ -6,6 +6,7 @@ import React from 'react'
 import LineChart from './LineChart';
 import TopBar from './TopBar';
 import { useDashboardStore } from '../../lib/store/Dashboardstore';
+import SystemHealth from "@/app/DashBoard/components/Basis2/TopBar/SystemHealth";
 
 
 const Basis2Data = () => {
@@ -16,7 +17,9 @@ const Basis2Data = () => {
 
   return (
     <div className=' flex flex-col'>
+     
       <div className=' w-full justify-center flex items-center'>
+        
         <div>
           <TopBar/>
         </div>
