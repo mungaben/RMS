@@ -106,7 +106,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
   };
  
   return (
-    <div className=" mx-auto h-full w-full text-sm overflow-x-scroll">
+    <div className="h-full w-full text-sm overflow-x-scroll">
       <Line options={options} data={data} />
     </div>
   );
