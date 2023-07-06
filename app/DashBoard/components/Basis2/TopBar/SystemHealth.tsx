@@ -107,18 +107,11 @@ const SystemHealth: React.FC<SystemHealthProps> = ({ System }) => {
   };
 
   return (
-    <div className=" flex flex-col justify-center items-center mt-5 mb-5  md:mx-5 h-full">
-      <div className="m-5">
-        <h1>
-          <span className="text-2xl font-bold flex">
-            {System.toLowerCase()} System
-          </span>
-        </h1>
-      </div>
-      <div className=" flex m-auto">
+    <div className=" flex flex-col justify-center items-center   md:mx-5 h-full">
+      <div className=" flex m-auto w-40 ">
         <Doughnut data={data} />
       </div>
-      <div className=" m-4">{titlelable}</div>
+      <div className="">{titlelable}</div>
     </div>
   );
 };

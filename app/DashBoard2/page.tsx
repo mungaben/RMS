@@ -1,6 +1,11 @@
 import { Metadata } from "next";
-import Image from "next/image";
 
+import { CalendarDateRangePicker } from "@/app/DashBoard2/components/date-range-picker";
+import { MainNav } from "@/app/DashBoard2/components/main-nav";
+import { RecentSales } from "@/app/DashBoard2/components/recent-sales";
+import { Search } from "@/app/DashBoard2/components/search";
+import TeamSwitcher from "@/app/DashBoard2/components/team-switcher";
+import { UserNav } from "@/app/DashBoard2/components/user-nav";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,15 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarDateRangePicker } from "@/app/DashBoard2/components/date-range-picker";
-import { MainNav } from "@/app/DashBoard2/components/main-nav";
-import { Overview } from "@/app/DashBoard2/components/overview";
-import { RecentSales } from "@/app/DashBoard2/components/recent-sales";
-import { Search } from "@/app/DashBoard2/components/search";
-import TeamSwitcher from "@/app/DashBoard2/components/team-switcher";
-import { UserNav } from "@/app/DashBoard2/components/user-nav";
 import Basis2Data from "../DashBoard/components/Basis2/Basis2Data";
-import SystemHealth from "../DashBoard/components/Basis2/TopBar/SystemHealth";
 import SystemHealthData from "../DashBoard/components/Basis2/TopBar/SystemHealthData";
 
 export const metadata: Metadata = {
@@ -77,7 +74,7 @@ export default function DashboardPage() {
                 Notifications
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="overview" className="space-y-4 overflow-scroll">
+            <TabsContent value="overview" className="space-y-4 ">
               <SystemHealthData />
 
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
@@ -86,7 +83,9 @@ export default function DashboardPage() {
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2 ">
-                    <Basis2Data />
+                    <div className="p-2 overflow-scroll">
+                      <Basis2Data />
+                    </div>
                   </CardContent>
                 </Card>
                 <Card className="col-span-3  gap-2 overflow-scroll">
