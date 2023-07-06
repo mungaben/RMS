@@ -38,7 +38,7 @@ const SelectSystem = () => {
 
   return (
     <Select onValueChange={handleSelectChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="">
         <SelectValue placeholder="SYSTEM" />
       </SelectTrigger>
       <SelectContent>

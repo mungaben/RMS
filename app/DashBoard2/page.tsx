@@ -17,6 +17,7 @@ import { RecentSales } from "@/app/DashBoard2/components/recent-sales";
 import { Search } from "@/app/DashBoard2/components/search";
 import TeamSwitcher from "@/app/DashBoard2/components/team-switcher";
 import { UserNav } from "@/app/DashBoard2/components/user-nav";
+import Basis2Data from "../DashBoard/components/Basis2/Basis2Data";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -26,24 +27,24 @@ export const metadata: Metadata = {
 export default function DashboardPage() {
   return (
     <>
-      <div className="md:hidden">
-        <Image
+      <div className=" flex overflow-hidden">
+        {/* <Image
           src="/examples/dashboard-light.png"
           width={1280}
           height={866}
           alt="Dashboard"
-          className="block dark:hidden"
+          className="block"
         />
         <Image
           src="/examples/dashboard-dark.png"
           width={1280}
           height={866}
           alt="Dashboard"
-          className="hidden dark:block"
-        />
+          className=" dark:block"
+        /> */}
       </div>
-      <div className="hidden flex-col md:flex">
-        <div className="border-b">
+      <div className=" flex-col md:flex overflow-hidden">
+        <div className="border-b  overflow-x-scroll ">
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />
             <MainNav className="mx-6" />
@@ -53,16 +54,16 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
-        <div className="flex-1 space-y-4 p-8 pt-6">
-          <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <div className="flex-1 space-y-4 p-8 pt-6 ">
+          <div className="flex items-center justify-between space-y-2  overflow-x-scroll">
+            <h2 className="text-3xl font-bold tracking-tight ">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />
-              <Button>Download</Button>
+              <Button className="">Download</Button>
             </div>
           </div>
-          <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList>
+          <Tabs defaultValue="overview" className="space-y-4   ">
+            <TabsList className="flex  overflow-x-scroll">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="analytics" disabled>
                 Analytics
@@ -179,12 +180,12 @@ export default function DashboardPage() {
                 </Card>
               </div>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4">
+                <Card className="col-span-4 overflow-x-scroll flex flex-col ">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
-                  <CardContent className="pl-2">
-                    <Overview />
+                  <CardContent className="pl-2 ">
+                    <Basis2Data/>
                   </CardContent>
                 </Card>
                 <Card className="col-span-3">
