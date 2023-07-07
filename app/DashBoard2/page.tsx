@@ -54,15 +54,15 @@ export default function DashboardPage() {
           </div>
         </div>
         <div className="flex-1 space-y-4 p-8 pt-6 ">
-          <div className="flex items-center justify-between space-y-2  overflow-x-scroll">
+          {/* <div className="flex items-center justify-between space-y-2  overflow-x-scroll">
             <h2 className="text-3xl font-bold tracking-tight ">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />
               <Button className="">Download</Button>
             </div>
-          </div>
+          </div> */}
           <Tabs defaultValue="overview" className="space-y-4   ">
-            <TabsList className="flex  overflow-x-scroll">
+            {/* <TabsList className="flex  overflow-x-scroll">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="analytics" disabled>
                 Analytics
@@ -73,7 +73,7 @@ export default function DashboardPage() {
               <TabsTrigger value="notifications" disabled>
                 Notifications
               </TabsTrigger>
-            </TabsList>
+            </TabsList> */}
             <TabsContent value="overview" className="space-y-4 ">
               <SystemHealthData />
 

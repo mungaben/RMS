@@ -76,3 +76,15 @@
     @apply bg-background text-foreground;
   }
 }
+::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+
+body :root html{
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+}
