@@ -2,6 +2,7 @@
 "use client"
 
 import React, { useEffect } from 'react'
+import DetailData from './DetailData'
 
 const Sytem = () => {
 
@@ -10,7 +11,9 @@ const Sytem = () => {
     }, [])
 
   return (
-    <div>Sytem</div>
+    <div>
+      <DetailData/>
+    </div>
   )
 }
 

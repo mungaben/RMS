@@ -68,8 +68,8 @@ export enum FromTime {
 }
 
 interface TableCell {
-    name: TableName;
-    value: number;
+    name ?: TableName;
+    value ?: number;
 }
 
 
@@ -78,7 +78,7 @@ type TableRow = {
   cells: TableCell[];
 };
 export const tableData1: TableCell[] = [
-  { name: TableName.CMS, value: 1},
+  { name: TableName.CMS, value: 0},
   { name: TableName.Basis2, value: 4 },
   { name: TableName.INTERFACE, value: 3 },
   { name: TableName.SPMS, value: 5 },

@@ -17,6 +17,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Basis2Data from "../DashBoard/components/Basis2/Basis2Data";
 import SystemHealthData from "../DashBoard/components/Basis2/TopBar/SystemHealthData";
+import Sytem from "../Details/components/Sytem";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -94,7 +95,7 @@ export default function DashboardPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <RecentSales />
+                    <Sytem/>
                   </CardContent>
                 </Card>
               </div>

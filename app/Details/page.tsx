@@ -1,8 +1,11 @@
 import React from 'react'
+import Sytem from './components/Sytem'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <Sytem/>
+    </div>
   )
 }
 
