@@ -68,8 +68,8 @@ export enum FromTime {
 }
 
 interface TableCell {
-    name ?: TableName;
-    value ?: number;
+    name : TableName;
+    value : number;
 }
 
 
@@ -90,10 +90,7 @@ export const tableData1: TableCell[] = [
 ];
 
 export const tableData: TableRow[] = [
-  {
-    id:FromTime.from_0700AM,
-    cells: tableData1
-  },
+
   {
     id: FromTime.from_0800AM,
     cells: tableData1
@@ -129,12 +126,21 @@ export const tableData: TableRow[] = [
     cells: tableData1
   },
   {
+    id: FromTime.from_1500AM,
+    cells: tableData1
+  },
+  {
+    id: FromTime.from_1500AM,
+    cells: tableData1
+  },
+  {
     id: FromTime.from_1600AM,
     cells: tableData1
   },
 
 
 ];
+
 
 
 

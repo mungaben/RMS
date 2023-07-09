@@ -1,3 +1,6 @@
+
+
+"use client"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
@@ -12,25 +15,25 @@ export function MainNav({
       {...props}
     >
       <Link
-        href="/examples/dashboard"
+        href="/ReportTables"
         className="text-sm font-medium transition-colors hover:text-primary"
       >
-        Overview
+        Reports
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Customers
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Products
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Settings

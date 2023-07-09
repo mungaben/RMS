@@ -89,9 +89,9 @@ export default function DashboardPage() {
                 </Card>
                 <Card className="col-span-3  gap-2 overflow-scroll">
                   <CardHeader>
-                    <CardTitle>Recent Sales</CardTitle>
+                    <CardTitle>Systems</CardTitle>
                     <CardDescription>
-                      You made 265 sales this month.
+                      Important Details
                     </CardDescription>
                   </CardHeader>
                   <CardContent>

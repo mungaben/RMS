@@ -9,6 +9,7 @@ import { TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { da } from "date-fns/locale";
 import { set } from "date-fns";
+import AllDatas from "../AllDatas";
 
 const DetailData = () => {
   const TablesData = useTableStore((state) => state.tableRowData);
@@ -84,7 +85,7 @@ const DetailData = () => {
               length of {dataAvail.Highest.HighestData.length} points
             </p>
           </div>
-          <div className="ml-auto font-medium">{dataAvail.Highest.Highest}</div>
+          <div className="ml-auto font-medium">{dataAvail.Highest.Highest}  <span>total reported</span></div>
         </div>
 
         <div className="flex items-center">
@@ -103,8 +104,11 @@ const DetailData = () => {
               length of {dataAvail.Highest.HighestData.length} points
             </p>
           </div>
-          <div className="ml-auto font-medium">{dataAvail.Highest.lowest}</div>
+          <div className="ml-auto font-medium">{dataAvail.Highest.lowest} <span>total reported</span></div>
         </div>
+      </div>
+      <div>
+        <AllDatas/>
       </div>
     </div>
   );
