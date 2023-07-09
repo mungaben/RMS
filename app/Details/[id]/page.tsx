@@ -20,7 +20,7 @@ const page:React.FC<paramsid> = ({params}) => {
     const dataAvail = useMemo(() => {
        // most active region system
       //  system with highest reports in the region
-      
+
     
 
 
@@ -41,7 +41,7 @@ const page:React.FC<paramsid> = ({params}) => {
   return (
     <div>
         <div>
-
+data
         </div>
     </div>
   )
