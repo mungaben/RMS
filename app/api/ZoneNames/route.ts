@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
     const body = await req.json();
-    const { name, zoneid } = body;
+    const { name, zonename } = body;
     // find region name
 
     try {
@@ -19,36 +19,43 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 error: 'Zone name is required',
             });
         }
-        if (!zoneid) {
+        if (!zonename) {
             return NextResponse.json({
                 error: 'Zone id is required',
+                statusbar: 'error',
             });
         }
         const zone = await prismaDb.zone.findFirst({
             where: {
-                name,
+                name:zonename,
             },
         });
         if (!zone) {
             return NextResponse.json({
                 error: 'Zone does not exists',
+                statusbar: 'error',
+
             });
-        }else if(zone){
+        }
+
+        if (zone) {
             const result = await
-            prismaDb.zoneNames.create({
-                data: {
-                    name,
-                    zoneId:zone.id
-                },
-            });
+                prismaDb.zoneNames.create({
+                    data: {
+                        name,
+                        zoneId: zone.id
+                    },
+                });
             return NextResponse.json({
                 message: 'Zone created successfully',
+                statusbar: 'success',
                 result,
             });
         }
     } catch (error) {
         return NextResponse.json({
             error: 'Error creating zone',
+            statusbar: 'error',
         });
     }
 

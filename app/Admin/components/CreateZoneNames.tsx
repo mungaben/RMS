@@ -31,19 +31,20 @@ import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
 import { useToast } from "@/components/ui/use-toast";
 import error from '../../ReportTables/error';
 import toast from "react-hot-toast";
+import { useZoneStore } from "@/app/ReportTables/lib/store/Zonestore";
+import SelectZone from "@/app/DashBoard/components/Basis2/SelectedZone";
 
 const ModalStore = () => {
   const [loading, setloading] = useState(false);
   const setsystem = useDashboardStore((state) => state.setSystem);
-  const setregion = useRegionStore((state) => state.setRegions);
-  const region = useRegionStore((state) => state.regions);
+const zone=useZoneStore((state)=>state.zones)
+const setZone=useZoneStore((state)=>state.setZones)
 
-  const zoneEnum = ["Zone1", "Zone2", "Zone3", "Zone4", "Zone5", "Zone6"] as const;
-  type ZoneEnum = typeof zoneEnum[number];
+ 
   
   const FormData = z.object({
-    name: z.enum(zoneEnum).refine(value => value !== undefined, {
-      message: "Please select a valid zone",
+    name:z.string().nonempty().min(3).max(20).refine(value => value !== undefined, {
+        message: "Please select a valid zone",
     }),
   });
   
@@ -52,21 +53,21 @@ const ModalStore = () => {
   const form = useForm<FormDataschema>({
     resolver: zodResolver(FormData),
     defaultValues: {
-      name: "Zone1",
+      name: "kayole",
     },
   });
   const Onsubmit = async (data: FormDataschema) => {
-    console.log("data in Create zones", data, region);
+    console.log("data in Create Zonename", data, zone);
     const dataPost = {
       name: data.name,
-      regionname: region,
+      zonename: zone,
     };
 
     try {
       setloading(true);
-      const response = await axios.post("/api/Zones", dataPost);
+      const response = await axios.post("/api/ZoneName", dataPost);
       console.log(
-        "response in create zones",
+        "response in create Zonename",
         response.data,
         response.data.statusbar
       );
@@ -79,7 +80,7 @@ const ModalStore = () => {
         toast.error(response.data.error);
       }
     } catch (error) {
-      console.log("error in create zones", error);
+      console.log("error in create Zonename", error);
       toast.error("something went wrong");
     } finally {
      
@@ -87,14 +88,14 @@ const ModalStore = () => {
     }
   };
   useEffect(() => {
-    console.log("region in create zones", region);
-  }, [region]);
+    console.log("region in create Zonename", zone);
+  }, [zone]);
 
   return (
     <Card className="left-0 right-0 mx-auto bg-red-200/50">
       <div className="flex flex-col justify-center mx-auto ">
         <CardHeader className="flex items-start justify-start">
-          <SelectRegion />
+          <SelectZone/>
         </CardHeader>
         <CardContent className="py-2 pb-4 space-y-4 ">
           <Form {...form}>
@@ -130,7 +131,7 @@ const ModalStore = () => {
         </CardContent>
       </div>
       <CardFooter>
-        <p>create zones</p>
+        <p>create Zonename</p>
       </CardFooter>
     </Card>
   );

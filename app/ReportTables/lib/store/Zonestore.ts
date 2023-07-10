@@ -6,6 +6,7 @@ import {create} from 'zustand';
 import { zoneEnum } from '../../components/TableSettlemets';
 
 type ZoneStore = {
+   
     zones: zoneEnum;
     setZones: (zones:zoneEnum ) => void;
 
