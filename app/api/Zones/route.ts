@@ -215,30 +215,30 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 // get zone with region and zonenames
 
 export async function GET(req: NextRequest, res: NextResponse) {
-    
-        // get regions and their zones
-    
-        try {
-            const result = await prismaDb.zone.findMany({
-                include: {
-                    region: true,
-                    zoneNames: true,
-                },
-            });
 
-            
-            console.log("result", result);
-            return NextResponse.json({
-                result,
-                statusbar: 'success',
-            });
-        } catch (error) {
-            return NextResponse.json({
-                error: 'Something went wrong in zone get',
-                statusbar: 'error',
-            });
-    
-        }
+    // get regions and their zones
+
+    try {
+        const result = await prismaDb.zone.findMany({
+            include: {
+                region: true,
+                zoneNames: true,
+            },
+        });
+
+
+        console.log("result", result);
+        return NextResponse.json({
+            result,
+            statusbar: 'success',
+        });
+    } catch (error) {
+        return NextResponse.json({
+            error: 'Something went wrong in zone get',
+            statusbar: 'error',
+        });
+
+    }
 
 }
 
