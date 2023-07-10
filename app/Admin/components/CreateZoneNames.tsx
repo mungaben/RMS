@@ -53,7 +53,7 @@ const setZone=useZoneStore((state)=>state.setZones)
   const form = useForm<FormDataschema>({
     resolver: zodResolver(FormData),
     defaultValues: {
-      name: "kayole",
+      name: "",
     },
   });
   const Onsubmit = async (data: FormDataschema) => {
@@ -65,7 +65,7 @@ const setZone=useZoneStore((state)=>state.setZones)
 
     try {
       setloading(true);
-      const response = await axios.post("/api/ZoneName", dataPost);
+      const response = await axios.post("/api/ZoneNames", dataPost);
       console.log(
         "response in create Zonename",
         response.data,
@@ -109,7 +109,7 @@ const setZone=useZoneStore((state)=>state.setZones)
                     <FormControl>
                       <Input
                         disabled={loading}
-                        placeholder="Regionname"
+                        placeholder="zonename"
                         {...field}
                       />
                     </FormControl>

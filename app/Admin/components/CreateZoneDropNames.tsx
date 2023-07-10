@@ -15,7 +15,7 @@ import CreateZoneNames from "./CreateZoneNames";
 
 const CreateZonesDrop = () => {
   return (
-    <div className="w-full top-10">
+    <div className="">
     <DropdownMenu>
       <DropdownMenuTrigger>Open</DropdownMenuTrigger>
       <DropdownMenuContent>
