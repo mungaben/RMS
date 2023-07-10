@@ -20,6 +20,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const { name, regionname } = body;
 
+
+
     try {
         // check if is empty
         if (!name) {
@@ -35,42 +37,59 @@ export async function POST(req: NextRequest, res: NextResponse) {
             });
         }
         // check if zone already exists
-        const zone = await prismaDb.zone.findFirst({
-            where: {
-                name,
-            },
-        });
+        console.log("posted data", name, regionname);
+
 
         // get region id from region name
         const region = await prismaDb.region.findFirst({
             where: {
                 name: regionname,
+                zones: {
+                    some: {
+                        name: name,
+                    },
+                },
             },
         });
-        if (!region) {
+        console.log("region", region);
+
+
+        if (region) {
+            return NextResponse.json({
+                error: 'Region does exist',
+                statusbar: 'error',
+
+            });
+        }
+        // get region id from region name
+        const regiondata = await prismaDb.region.findFirst({
+            where: {
+                name: regionname,
+            },
+        });
+        console.log("regiondata", regiondata);
+
+        if (!regiondata) {
             return NextResponse.json({
                 error: 'Region does not exist',
                 statusbar: 'error',
-
             });
         }
-        const regionId = region.id;
 
-        if (zone) {
-            return NextResponse.json({
-                error: 'Zone already exists',
-                statusbar: 'error',
-                
-            });
-        }
+
+
+
 
         // create zone
         const result = await prismaDb.zone.create({
             data: {
                 name,
-                regionId
+                regionId: regiondata.id,
             },
         });
+        console.log("result", result);
+
+
         return NextResponse.json({
             message: 'Zone created successfully',
             result,
@@ -81,15 +100,15 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
 
 
-        
+
     } catch (error) {
         return NextResponse.json({
             error: 'Something went wrong in zone creation',
             statusbar: 'error',
         });
-        
+
     }
 
-   
+
 
 }

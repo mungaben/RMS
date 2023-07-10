@@ -30,16 +30,16 @@ import SelectRegion from "@/app/DashBoard/components/Basis2/SelectedRegion";
 import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
 import { useToast } from "@/components/ui/use-toast";
 import error from '../../ReportTables/error';
+import toast from "react-hot-toast";
 
 const ModalStore = () => {
   const [loading, setloading] = useState(false);
   const setsystem = useDashboardStore((state) => state.setSystem);
-const setregion=useRegionStore((state)=>state.setRegions)
-const region = useRegionStore((state) => state.regions);
-const { toast } = useToast()
+  const setregion = useRegionStore((state) => state.setRegions);
+  const region = useRegionStore((state) => state.regions);
+
   const FormData = z.object({
     name: z.string().min(2, "name must be at least 2 characters"),
-   
   });
 
   type FormDataschema = z.infer<typeof FormData>;
@@ -48,76 +48,52 @@ const { toast } = useToast()
     resolver: zodResolver(FormData),
     defaultValues: {
       name: "",
-  
-
     },
   });
   const Onsubmit = async (data: FormDataschema) => {
-    console.log("data in Create zones",data,region);
-    const dataPost={
-      name:data.name,
-      regionname:region
-    }
-    
+    console.log("data in Create zones", data, region);
+    const dataPost = {
+      name: data.name,
+      regionname: region,
+    };
+
     try {
       setloading(true);
-      const response = await axios.post("/api/Zones",dataPost);
-      console.log("response in create zones",response.data,response.data.statusbar);
+      const response = await axios.post("/api/Zones", dataPost);
+      console.log(
+        "response in create zones",
+        response.data,
+        response.data.statusbar
+      );
 
-      
-
-      // if (response.status === 200 && response.data.statusbar === "success") {
-      //   toast({
-          
-      //     description: "There was a problem with your request.",
-      //     variant: "default",
-      //     duration: 9000,
-          
-      //   })
-
-      // }
-      // if response error message
-      if (response.status=== 200) {
-        toast({
-          
-          description: response.data.error,
-          variant: "destructive",
-         
-          
-        })
+      if (response.data.statusbar === "success") {
+        toast.success(response.data.message);
       }
 
-
-     
+      if (response.data.statusbar === "error") {
+        toast.error(response.data.error);
+      }
     } catch (error) {
-      console.log("error in create zones",error);
-      toast({
-        description: "There was a problem with your request.",
-      })
+      console.log("error in create zones", error);
+      toast.error("something went wrong");
     } finally {
-      // toast({
-      //   title: "dont know",
-      //   description: "There was a problem with your request.",
-      // })
+     
       setloading(false);
     }
   };
-useEffect(() => {
-  console.log("region in create zones",region);
-  
-}, [region]);
+  useEffect(() => {
+    console.log("region in create zones", region);
+  }, [region]);
 
   return (
     <Card className="left-0 right-0 mx-auto bg-red-200/50">
       <div className="flex flex-col justify-center mx-auto ">
-        <CardHeader>
+        <CardHeader className="flex items-start justify-start">
           <SelectRegion />
         </CardHeader>
         <CardContent className="py-2 pb-4 space-y-4 ">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(Onsubmit)}>
-        
-          
               <FormField
                 control={form.control}
                 name="name"
@@ -130,7 +106,6 @@ useEffect(() => {
                         placeholder="Regionname"
                         {...field}
                       />
-                      
                     </FormControl>
                     <FormMessage />
                   </FormItem>
