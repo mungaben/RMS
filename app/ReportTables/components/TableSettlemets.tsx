@@ -1,4 +1,15 @@
-export const informalSettlementsNcswc = {
+
+export interface Regiontypes {
+  Zone1: string[];
+  Zone2: string[];
+  Zone3: string[];
+  Zone4?: string[]; // Optional
+  Zone5?: string[]; // Optional
+  Zone6?: string[]; // Optional
+}
+
+
+export const informalSettlements = {
   Zone1: [
     "Maendeleo Community School",
     "Mukuru Kwa Reuben Chiefs Camp",
@@ -173,7 +184,7 @@ export const centralRegion = {
 };
 
 export const nairobiRegions = {
-  informalSettlementsNcswc,
+  informalSettlements,
   westernRegion,
   southernRegion,
   northEasternRegion,
@@ -181,3 +192,31 @@ export const nairobiRegions = {
   easternRegion,
   centralRegion,
 };
+
+
+export const Regions = [
+  "westernRegion",
+  "southernRegion",
+  "northEasternRegion",
+  "northernRegion",
+  "easternRegion",
+  "centralRegion",
+  "informalSettlements"
+];
+
+
+
+export type EnumRegions = "westernRegion" | "southernRegion" | "northEasternRegion" | "northernRegion" | "easternRegion" | "centralRegion" | "informalSettlements";
+
+
+
+enum RegionEnum {
+  WesternRegion = "WesternRegion",
+  SouthernRegion = "SouthernRegion",
+  NorthEasternRegion = "NorthEasternRegion",
+  NorthernRegion = "NorthernRegion",
+  EasternRegion = "EasternRegion",
+  CentralRegion = "CentralRegion",
+  InformalSettlements = "InformalSettlements",
+}
+

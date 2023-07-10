@@ -15,6 +15,7 @@ export enum TableName {
 }
 type TableHeadData = "Basis2" | "INTERFACE" | "CMS" | "SPMS" | "NEW PERPAY" | "OLD PERPAY" | "UTILITY MASTER" | "INTERNET" | "Exchange BrowserMail" ;
 interface DashboardState {
+ 
   dashboard: Date;
   system:TableHeadData ;
   setSystem: (system:TableHeadData) => void;
@@ -25,5 +26,5 @@ export const useDashboardStore = create<DashboardState>((set) => ({
   dashboard: new Date(),
   system: 'CMS',
   setSystem: (system) => set((state) => ({ system: system })),
-  setDashboard: (dash) => set((state) => ({ dashboard: dash })),
+  setDashboard: (dash) => set((state) => ({ dashboard: dash }))
 }));
