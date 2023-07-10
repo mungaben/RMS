@@ -60,8 +60,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
 
 export async function GET(req: NextRequest, res: NextResponse) {
-    const result = await prismaDb.region.findMany();
-    return NextResponse.json(result);
+//    get regions and their zones
+    const regions = await prismaDb.region.findMany({
+        include: {
+            zones: true,
+        },
+    });
 }
 
 export async function PUT(req: NextRequest, res: NextResponse) {

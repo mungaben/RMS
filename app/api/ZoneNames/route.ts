@@ -32,7 +32,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 name: zonename,
             },
         });
-        console.log("zone", zone?.id);
+
 
         if (!zone) {
             return NextResponse.json({
@@ -43,21 +43,21 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
 
         if (zone) {
-            console.log("zone in zone", zone);
+
 
             const result = await prismaDb.zoneNames.create({
                 data: {
-                  name,
-                  zone: {
-                    connect: {
-                      id: zone.id,
+                    name,
+                    zone: {
+                        connect: {
+                            id: zone.id,
+                        },
                     },
-                  },
                 },
-              });
-          
-              console.log("result", result);
-                
+            });
+
+
+
             return NextResponse.json({
                 message: 'Zone created successfully',
                 statusbar: 'success',
@@ -65,8 +65,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
             });
         }
     } catch (error) {
-        console.log("error", "error");
-        
+
+
         return NextResponse.json({
             error: 'Error creating zone',
             statusbar: 'error',
@@ -74,4 +74,25 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }
 
 
+}
+
+
+// get all zonenames including zonenames
+
+export async function GET(req: NextRequest, res: NextResponse) {
+    try {
+        const zonenames = await prismaDb.zoneNames.findMany({
+            include: {
+                zone: true,
+            },
+        });
+        return NextResponse.json({
+            zonenames,
+        });
+    } catch (error) {
+        return NextResponse.json({
+            error: 'Error fetching zone',
+            statusbar: 'error',
+        });
+    }
 }
