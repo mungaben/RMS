@@ -112,3 +112,5 @@ export async function PUT(req: NextRequest, {params}: {params:Zoneprops}, res: N
         });
     }
 }
+
+
