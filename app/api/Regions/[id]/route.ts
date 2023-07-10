@@ -28,9 +28,9 @@ export async function DELETE(req: NextRequest,{params}:{params:Idtype}, res: Nex
         });
        
         
-        return NextResponse.json({message: "user deleted"});
+        return NextResponse.json({message: "Region deleted"});
     }else{
-        return NextResponse.json({error: "user not found"});
+        return NextResponse.json({error: "region not found"});
     }
 
   
