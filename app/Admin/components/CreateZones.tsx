@@ -38,16 +38,21 @@ const ModalStore = () => {
   const setregion = useRegionStore((state) => state.setRegions);
   const region = useRegionStore((state) => state.regions);
 
+  const zoneEnum = ["Zone1", "Zone2", "Zone3", "Zone4", "Zone5", "Zone6"] as const;
+  type ZoneEnum = typeof zoneEnum[number];
+  
   const FormData = z.object({
-    name: z.string().min(2, "name must be at least 2 characters"),
+    name: z.enum(zoneEnum).refine(value => value !== undefined, {
+      message: "Please select a valid zone",
+    }),
   });
-
+  
   type FormDataschema = z.infer<typeof FormData>;
 
   const form = useForm<FormDataschema>({
     resolver: zodResolver(FormData),
     defaultValues: {
-      name: "",
+      name: "Zone1",
     },
   });
   const Onsubmit = async (data: FormDataschema) => {

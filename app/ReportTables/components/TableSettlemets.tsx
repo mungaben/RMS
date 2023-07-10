@@ -7,6 +7,7 @@ export interface Regiontypes {
   Zone5?: string[]; // Optional
   Zone6?: string[]; // Optional
 }
+export type  zoneEnum = "Zone1" | "Zone2" | "Zone3" | "Zone4" | "Zone5" | "Zone6";
 
 
 export const informalSettlements = {
