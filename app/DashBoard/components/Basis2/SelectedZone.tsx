@@ -13,19 +13,23 @@ import {
 import {
   EnumRegions,
   Regions,
+  zoneEnum,
 } from "@/app/ReportTables/components/TableSettlemets";
 import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
+import { useZoneStore } from "@/app/ReportTables/lib/store/Zonestore";
 
-const SelectRegion = () => {
+
+const SelectZone = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
 
-  const setRegion = useRegionStore((state) => state.setRegions);
-  const Region = useRegionStore((state) => state.regions);
+const zone=useZoneStore((state)=>state.zones)
+const setZone=useZoneStore((state)=>state.setZones)
+const zoneEnums: zoneEnum[] = ["Zone1", "Zone2", "Zone3", "Zone4", "Zone5", "Zone6"];
 
-  const handleSelectChange = (value: EnumRegions) => {
+  const handleSelectChange = (value:zoneEnum) => {
     setSelectedOption(value);
     // console.log("slected option in Topnav",value);
-    setRegion(value);
+    setZone(value)
 
     // Your additional logic here, which will execute when the value changes.
   };
@@ -33,10 +37,10 @@ const SelectRegion = () => {
   return (
     <Select onValueChange={handleSelectChange}>
       <SelectTrigger className="">
-        <SelectValue placeholder={Region} />
+        <SelectValue placeholder={zone} />
       </SelectTrigger>
       <SelectContent>
-        {Regions.map((item) => (
+        {zoneEnums.map((item) => (
           <SelectItem key={item} value={item}>
             {item}
           </SelectItem>
@@ -46,4 +50,4 @@ const SelectRegion = () => {
   );
 };
 
-export default SelectRegion;
+export default SelectZone;
