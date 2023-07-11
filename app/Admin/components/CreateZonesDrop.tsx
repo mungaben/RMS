@@ -15,9 +15,9 @@ import CreateZones from "./CreateZones";
 const CreateZonesDrop = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger >Open</DropdownMenuTrigger>
+      <DropdownMenuTrigger >create zones</DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>My Accont</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <CreateZones/>
        
