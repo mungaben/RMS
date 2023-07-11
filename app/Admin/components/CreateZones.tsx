@@ -91,12 +91,13 @@ const ModalStore = () => {
   }, [region]);
 
   return (
-    <Card className="left-0 right-0 mx-auto bg-red-200/50">
-      <div className="flex flex-col justify-center mx-auto ">
-        <CardHeader className="flex items-start justify-start">
+    <div className="w-full  flex flex-col">
+    <div className="">
+      <div className="">
+        <div className="">
           <SelectRegion />
-        </CardHeader>
-        <CardContent className="py-2 pb-4 space-y-4 ">
+        </div>
+        <section className="py-2 pb-4 space-y-4  w-full">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(Onsubmit)}>
               <FormField
@@ -127,12 +128,13 @@ const ModalStore = () => {
               </div>
             </form>
           </Form>
-        </CardContent>
+        </section>
       </div>
-      <CardFooter>
+      <footer>
         <p>create zones</p>
-      </CardFooter>
-    </Card>
+      </footer>
+    </div>
+    </div>
   );
 };
 

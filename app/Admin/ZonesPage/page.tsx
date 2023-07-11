@@ -1,10 +1,16 @@
 
 
 import React from 'react'
+import AddZones from './components/AddZones'
 
 const page = () => {
   return (
-    <div>page zones</div>
+    <div className='flex flex-grow'>
+        <div className=' flex  bg-red-600 flex-grow'>
+        <AddZones/>
+        </div>
+       
+    </div>
   )
 }
 

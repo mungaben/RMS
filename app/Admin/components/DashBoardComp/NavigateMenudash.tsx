@@ -23,35 +23,42 @@ const NavigateMenudash = () => {
         <NavigationMenuItem>
           <Link href={"/Admin/Users"} legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <span className=" flex md:text-lg lg:text-2xl">Add User</span>
+              <span className=" flex md:text-lg lg:text-2xl">Users</span>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href={"/Admin/RegionsPage"} legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <span className=" flex md:text-lg lg:text-2xl">Region</span>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href={"/Admin/ZonesPage"} legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <span className=" flex md:text-lg lg:text-2xl">Zone </span>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href={"/Admin/ZoneNamespage"} legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <span className="flex md:text-lg ">ZoneNames </span>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href={"/Admin/Position"} legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <span className="flex md:text-lg ">Positions </span>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href={"/"} legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <span className=" flex md:text-lg lg:text-2xl">Add Region</span>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href={"/"} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <span className=" flex md:text-lg lg:text-2xl">Add Zone </span>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href={"/"} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <span className="flex md:text-lg lg:text-2xl">Add Zone Name </span>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href={"/"} legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <span className=" flex md:text-lg lg:text-2xl">HomePage</span>
+              <span className=" flex md:text-lg lg:text-2xl">Home</span>
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

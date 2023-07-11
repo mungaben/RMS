@@ -5,7 +5,7 @@ import React from 'react'
 
 const loading = () => {
   return (
-    <div>loading</div>
+    <div className=' w-full'>loading</div>
   )
 }
 
