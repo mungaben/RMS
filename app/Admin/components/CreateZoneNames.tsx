@@ -29,7 +29,7 @@ import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
 import SelectRegion from "@/app/DashBoard/components/Basis2/SelectedRegion";
 import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
 import { useToast } from "@/components/ui/use-toast";
-import error from '../../ReportTables/error';
+import error from "../../ReportTables/error";
 import toast from "react-hot-toast";
 import { useZoneStore } from "@/app/ReportTables/lib/store/Zonestore";
 import SelectZone from "@/app/DashBoard/components/Basis2/SelectedZone";
@@ -37,17 +37,20 @@ import SelectZone from "@/app/DashBoard/components/Basis2/SelectedZone";
 const ModalStore = () => {
   const [loading, setloading] = useState(false);
   const setsystem = useDashboardStore((state) => state.setSystem);
-const zone=useZoneStore((state)=>state.zones)
-const setZone=useZoneStore((state)=>state.setZones)
+  const zone = useZoneStore((state) => state.zones);
+  const setZone = useZoneStore((state) => state.setZones);
 
- 
-  
   const FormData = z.object({
-    name:z.string().nonempty().min(3).max(20).refine(value => value !== undefined, {
+    name: z
+      .string()
+      .nonempty()
+      .min(3)
+      .max(20)
+      .refine((value) => value !== undefined, {
         message: "Please select a valid zone",
-    }),
+      }),
   });
-  
+
   type FormDataschema = z.infer<typeof FormData>;
 
   const form = useForm<FormDataschema>({
@@ -83,7 +86,6 @@ const setZone=useZoneStore((state)=>state.setZones)
       console.log("error in create Zonename", error);
       toast.error("something went wrong");
     } finally {
-     
       setloading(false);
     }
   };
@@ -95,7 +97,7 @@ const setZone=useZoneStore((state)=>state.setZones)
     <Card className="left-0 right-0 mx-auto bg-red-200/50">
       <div className="flex flex-col justify-center mx-auto ">
         <CardHeader className="flex items-start justify-start">
-          <SelectZone/>
+          <SelectZone />
         </CardHeader>
         <CardContent className="py-2 pb-4 space-y-4 ">
           <Form {...form}>

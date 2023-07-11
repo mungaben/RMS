@@ -10,8 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
 enum Role {
   ADMIN
   USER
@@ -35,24 +33,25 @@ model User {
 model Region {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  zones Zone[] 
+  zones Zone[]
   users User[]
 }
 
 model Zone {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String 
+  name String
 
-  region   Region @relation(fields: [regionId], references: [id])
-  regionId String @db.ObjectId
+  region    Region      @relation(fields: [regionId], references: [id])
+  regionId  String      @db.ObjectId
   zoneNames ZoneNames[]
-
 }
+
 model ZoneNames {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String  @unique
-  zone  Zone @relation(fields: [zoneId], references: [id])
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  name   String @unique
+  zone   Zone   @relation(fields: [zoneId], references: [id])
   zoneId String @db.ObjectId
+  @@unique([name,zoneId])
 }
 
 model Position {

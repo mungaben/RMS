@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest, res: NextResponse) {
     const body = await req.json();
     const { name, zonename } = body;
-    console.log("posted data", name, zonename);
+ 
 
     // find region name
 
@@ -19,6 +19,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         if (!name) {
             return NextResponse.json({
                 error: 'Zone name is required',
+                statusbar: 'error',
             });
         }
         if (!zonename) {
@@ -32,6 +33,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 name: zonename,
             },
         });
+      
 
 
         if (!zone) {
@@ -41,29 +43,44 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
             });
         }
+        // check if name exists
+        const zoneNameexists = await prismaDb.zoneNames.findFirst({
+            where: {
+                name: name,
+            },
+        });
+      
+        if (zoneNameexists) {
+            return NextResponse.json({
+                error: 'Zone name already exists',
+                statusbar: 'error',
+            })
+        }
 
-        if (zone) {
 
 
-            const result = await prismaDb.zoneNames.create({
-                data: {
-                    name,
-                    zone: {
-                        connect: {
-                            id: zone.id,
-                        },
+
+
+
+        const result = await prismaDb.zoneNames.create({
+            data: {
+                name,
+                zone: {
+                    connect: {
+                        id: zone.id,
                     },
                 },
-            });
+            },
+        });
 
 
 
-            return NextResponse.json({
-                message: 'Zone created successfully',
-                statusbar: 'success',
-                result,
-            });
-        }
+        return NextResponse.json({
+            message: 'Zone created successfully',
+            statusbar: 'success',
+            result,
+        });
+
     } catch (error) {
 
 
