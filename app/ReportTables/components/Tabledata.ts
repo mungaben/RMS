@@ -1,5 +1,20 @@
 import { table } from "console";
 
+interface Regionapi {
+  id: string;
+  name: string;
+}
+
+
+export interface Zoneapi {
+  id: string;
+  name: string;
+  regionId: string;
+  region: Regionapi;
+  zoneNames: string[];
+}
+
+
 
 
 type TableHeadDatas =

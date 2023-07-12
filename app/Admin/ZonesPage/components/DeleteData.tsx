@@ -1,33 +1,19 @@
 "use client";
 
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-
-import useSWR from "swr";
 import { Zoneapi } from "@/app/ReportTables/components/Tabledata";
-import DeleteData from "./DeleteData";
-import { isFirstDayOfMonth } from "date-fns/fp";
+import { Button } from "@/components/ui/button";
+import axios from "axios";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import useSWR from "swr";
 
-export const url = "/api/Zones";
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+const DeleteData = ({ item }: { item: Zoneapi }) => {
+  const url = `/api/Zones/${item.id}`;
+  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const [setloading, setsetloading] = useState(false);
 
-const DeleteZone = () => {
-  //  console.log("fetcher in delete zone", fetcher);
-
-  //  useSWR(url, fetcher)
   const { data, error, isLoading,mutate } = useSWR(url, fetcher);
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
-  console.log("data in delete zone", data, error, isLoading);
+  
 
   const handleDelete = async (event: React.MouseEvent<HTMLElement>) => {
     const id = (event.currentTarget as HTMLButtonElement).value;
@@ -51,9 +37,7 @@ const DeleteZone = () => {
         response.data.statusbar
       );
 
-      if (response.data.statusbar === "success") {
-        toast.success(response.data.message);
-      }
+     
 
       if (response.data.statusbar === "error") {
         toast.error(response.data.error);
@@ -65,21 +49,21 @@ const DeleteZone = () => {
       //  setloading(false);
     }
   };
-
   return (
     <div>
-      delete
       <div>
-        {data && <div> helloi</div>}
-        {data &&
-          data?.result.map((item: Zoneapi) => (
-            <div key={item.id}>
-              <DeleteData item={item}/>
-            </div>
-          ))}
+        <div>{item.name}</div>
+        <Button
+          value={item.id}
+          variant="default"
+          disabled={false}
+          onClick={handleDelete}
+        >
+          delete
+        </Button>
       </div>
     </div>
   );
 };
 
-export default DeleteZone;
+export default DeleteData;

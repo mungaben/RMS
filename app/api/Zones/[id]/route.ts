@@ -24,6 +24,7 @@ export async function DELETE(req: NextRequest,{params}:{params:Zoneprops}, res: 
         if (!zone) {
             return NextResponse.json({
                 error: 'Zone does not exist',
+                statusbar: 'error',
             });
         }
         const result = await prismaDb.zone.delete({
@@ -34,11 +35,13 @@ export async function DELETE(req: NextRequest,{params}:{params:Zoneprops}, res: 
         return NextResponse.json({
 
             message: 'Zone deleted successfully',
+            statusbar: 'success',
             result,
         });
     } catch (error) {
         return NextResponse.json({
             error: 'Something went wrong',
+            statusbar: 'error',
         });
     }
 }

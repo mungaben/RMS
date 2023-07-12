@@ -1,13 +1,19 @@
+
+
+
+
+
 "use client";
 
+import SelectSystem from "@/app/DashBoard/components/Basis2/SelectSystem";
 import { Button } from "@/components/ui/button";
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,17 +21,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import SelectRegion from "@/app/DashBoard/components/Basis2/SelectedRegion";
-import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
-import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
+import { z } from "zod";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
-  CardHeader
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
+import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
+import SelectRegion from "@/app/DashBoard/components/Basis2/SelectedRegion";
+import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
+import { useToast } from "@/components/ui/use-toast";
+import error from '../../ReportTables/error';
 import toast from "react-hot-toast";
-import { z } from "zod";
 
 const ModalStore = () => {
   const [loading, setloading] = useState(false);
@@ -51,7 +61,7 @@ const ModalStore = () => {
     },
   });
   const Onsubmit = async (data: FormDataschema) => {
-    console.log("data in Create zones", data, region);
+    console.log("data in updating zones", data, region);
     const dataPost = {
       name: data.name,
       regionname: region,
@@ -59,9 +69,9 @@ const ModalStore = () => {
 
     try {
       setloading(true);
-      const response = await axios.post("/api/Zones", dataPost);
+      const response = await axios.put("/api/Zones", dataPost);
       console.log(
-        "response in create zones",
+        "response in update zones",
         response.data,
         response.data.statusbar
       );
@@ -82,7 +92,7 @@ const ModalStore = () => {
     }
   };
   useEffect(() => {
-    console.log("region in create zones", region);
+    console.log("region in update zones", region);
   }, [region]);
 
   return (
@@ -117,7 +127,7 @@ const ModalStore = () => {
                 {/* <Button disabled={loading} variant="outline">
                   cancel
                 </Button> */}
-                <Button disabled={loading} type="submit" variant="outline">
+                <Button disabled={loading} type="submit" variant="secondary">
                   continue
                 </Button>
               </div>
@@ -126,7 +136,7 @@ const ModalStore = () => {
         </CardContent>
       </div>
       <CardFooter>
-        <p>create zones</p>
+        <p>update zones</p>
       </CardFooter>
     </Card>
     </div>

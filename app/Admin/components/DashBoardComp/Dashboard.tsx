@@ -16,7 +16,7 @@ import NavigateMenudash from "./NavigateMenudash";
 
 const Dashboard = () => {
   return (
-    <div className=" shadow-none md:flex md:flex-col md:w-3/12 lg:w-2/12  text-sm md:text-lg top-5 hidden ">
+    <div className=" shadow-none md:flex md:flex-col  text-sm md:text-lg top-5 hidden ">
       <Card className=" flex-grow ">
         <CardHeader>
           <CardTitle className="  font-bold text-2xl"> Admin</CardTitle>

@@ -37,7 +37,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             });
         }
         // check if zone already exists
-        console.log("posted data", name, regionname);
+
 
 
         // get region id from region name
@@ -51,12 +51,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 },
             },
         });
-        console.log("region", region);
+
 
 
         if (region) {
             return NextResponse.json({
-                error: 'Region does exist',
+                error: `Region ${regionname} with zone  ${name}  does exist`,
                 statusbar: 'error',
 
             });
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 name: regionname,
             },
         });
-        console.log("regiondata", regiondata);
+
 
         if (!regiondata) {
             return NextResponse.json({
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 regionId: regiondata.id,
             },
         });
-        console.log("result", result);
+
 
 
         return NextResponse.json({
@@ -153,11 +153,11 @@ export async function PUT(req: NextRequest, res: NextResponse) {
                 },
             },
         });
-        console.log("region", region);
+        console.log("region  with such id exists", region);
 
-        if (region) {
+        if (!region) {
             return NextResponse.json({
-                error: 'Region has that zone already',
+                error: ' zone in region does not exist',
                 statusbar: 'error',
 
             });
@@ -176,11 +176,24 @@ export async function PUT(req: NextRequest, res: NextResponse) {
                 statusbar: 'error',
             });
         }
+        // check zone exists
+        const zone = await prismaDb.zone.findFirst({
+            where: {
+                name: name,
+            },
+        });
+
+        if (!zone) {
+            return NextResponse.json({
+                error: 'Zone does not exist',
+                statusbar: 'error',
+            });
+        }
 
         // update zone
         const result = await prismaDb.zone.update({
             where: {
-                id,
+                id: zone.id
             },
             data: {
                 name,
@@ -222,7 +235,14 @@ export async function GET(req: NextRequest, res: NextResponse) {
         const result = await prismaDb.zone.findMany({
             include: {
                 region: true,
-                zoneNames: true,
+                zoneNames: {
+                    select: {
+                        name: true,
+                        id: true
+                    },
+
+
+                }
             },
         });
 
