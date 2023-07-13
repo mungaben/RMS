@@ -1,8 +1,3 @@
-
-
-
-
-
 "use client";
 
 import axios from "axios";
@@ -18,7 +13,6 @@ import { Button } from "@/components/ui/button";
 
 import useSWR from "swr";
 import { Zoneapi } from "@/app/ReportTables/components/Tabledata";
-
 
 import {
   Table,
@@ -44,29 +38,21 @@ const DeleteZone = () => {
   }
   console.log("data in delete zone", data, error, isLoading);
 
- 
   return (
     <Table>
       <TableHeader>
         <TableRow>
-        
           <TableHead> Name</TableHead>
-          <TableHead> zonename</TableHead>
-        
         </TableRow>
       </TableHeader>
 
       <TableBody>
-      
         {data &&
           data?.zonenames.map((item: Zoneapi) => (
-            <TableRow key={item.id} >
+            <TableRow key={item.id}>
               <DeleteZoneNameData item={item} mutate={mutate} />
-            
             </TableRow>
           ))}
-       
-         
       </TableBody>
     </Table>
   );

@@ -60,20 +60,11 @@ const DeleteZoneNameData = ({
     }
   };
 
-  
   return (
     <>
       <TableCell>
         <h2> {item.name}</h2>
       </TableCell>
-      <TableCell>
-        <Input
-          placeholder={item.name}
-          value={zonename}
-          onChange={(e) => setzonename(e.target.value)}
-        />
-      </TableCell>
-   
 
       <td className="mx-2">
         <Button
