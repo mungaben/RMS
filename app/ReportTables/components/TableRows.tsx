@@ -5,11 +5,17 @@ import React from "react";
 import { TablecellObjects } from "./Tabledata";
 import TableInputs from "./TableInputs";
 import { FromTime } from "./Tabledata";
+import { Button } from "@/components/ui/button";
+import useTableStore from "../lib/store/TableStore";
 
 const TableRows = () => {
   const fromTimeArray = Object.entries(FromTime) ;
+  const storedata=useTableStore((state)=>state.tableRowData)
 //   map it
+const handlePOstData=(event: React.MouseEvent<HTMLElement>)=>{
 
+
+}
 
   return (
     <>
@@ -20,7 +26,18 @@ const TableRows = () => {
               <TableInputs id={FromTime[key as keyof typeof FromTime]} name={cellvalue} />
             </TableCell>
           ))}
-        </TableRow>
+          <td>
+          <Button
+          onClick={handlePOstData}
+
+          >
+            Save 
+          </Button>
+      
+
+          </td>
+          </TableRow>
+         
       ))}
     </>
   );
