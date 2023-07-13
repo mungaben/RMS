@@ -21,6 +21,8 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    console.log();
+    
 
     if (value === "" || (parseInt(value) >= 0 && parseInt(value) <= 5)) {
       setInputValue(value);

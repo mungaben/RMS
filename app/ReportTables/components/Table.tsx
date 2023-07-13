@@ -22,6 +22,7 @@ const MyTable = () => {
           {TableHeadData.map((item, index) => (
             <React.Fragment key={index}>
               <TableHead className="">{item}</TableHead>
+              
             </React.Fragment>
           ))}
         </TableRow>
