@@ -3,10 +3,13 @@
 
 
 import React from 'react'
+import DeletePositions from '../../components/DeletePositions'
 
 const DeletePosition = () => {
   return (
-    <div>DeletePosition</div>
+    <div>
+      <DeletePositions/>
+    </div>
   )
 }
 

@@ -71,6 +71,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
             zones: true,
         },
     });
+    return NextResponse.json({
+        message: 'Regions fetched successfully',
+        statusbar: 'success',
+        regions,
+    });
 }
 
 export async function PUT(req: NextRequest, res: NextResponse) {

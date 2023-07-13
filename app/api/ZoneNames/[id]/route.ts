@@ -16,6 +16,7 @@ export async function DELETE(req: NextRequest, { params }: { params: ZoneName },
         if (!id) {
             return NextResponse.json({
                 error: 'ZoneName id is required',
+                statusbar:'error'
             });
         }
         // check if zonename already exists
@@ -23,13 +24,14 @@ export async function DELETE(req: NextRequest, { params }: { params: ZoneName },
             where: {
                 id: id,
             },
-            include: {
-                zone: true,
-            }
+           
         });
+
         if (!zonenameexist) {
             return NextResponse.json({
                 error: 'ZoneName does not exists',
+                statusbar:'error'
+
             });
         }
 
@@ -41,13 +43,30 @@ export async function DELETE(req: NextRequest, { params }: { params: ZoneName },
                 id: id,
             },
         });
+        // check zoneid 
+        const zoneid = await prismaDb.zone.findFirst({
+            where: {
+                id: zonename?.zoneId,
+            },
+        });
+        // if no zone
+        if (!zoneid) {
+            return NextResponse.json({
+                error: 'Zone does not exists',
+                statusbar:'error'
+            });
+        }
+
         return NextResponse.json({
-            message: `ZoneName  name deleted successfully for ${zonename?.name}`,
+            message: `ZoneName ${zonename?.name}  deleted successfully for ${zoneid?.name} `,
+            statusbar:'success',
             zonename,
         });
     } catch (error) {
         return NextResponse.json({
             error: 'Something went wrong',
+            statusbar:'error'
+
         });
     }
 }
@@ -108,3 +127,50 @@ export async function PUT(req: NextRequest, { params }: { params: ZoneName }, re
 
 
 
+
+
+// get request for single item
+export async function GET(req: NextRequest, { params }: { params: ZoneName }, res: NextResponse) {
+    const { id } = params;
+  
+    try {
+        // check if is empty
+        if (!id) {
+            return NextResponse.json({
+                error: 'ZoneName id is required',
+                statusbar:'error'
+            });
+        }
+        // check if zonename already exists
+        const zonenameexist = await prismaDb.zoneNames.findFirst({
+            where: {
+                id: id,
+            },
+            include: {
+                zone: true,
+            }
+        });
+        if (!zonenameexist) {
+            return NextResponse.json({
+                error: 'ZoneName does not exists',
+                statusbar:'error'
+            });
+        }
+        const zonename = await prismaDb.zoneNames.findFirst({
+            where: {
+                id: id,
+            },
+          
+        });
+        return NextResponse.json({
+            message: `ZoneName  name fetched successfully for ${zonename?.name}`,
+            statusbar:'success',
+            zonename,
+        });
+    } catch (error) {
+        return NextResponse.json({
+            error: 'Something went wrong',
+            statusbar:'error'
+        });
+    }
+}

@@ -24,9 +24,9 @@ model User {
   myNumber  String   @unique
 
   role       Role     @default(USER)
-  position   Position @relation(fields: [positionId], references: [id])
+  position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
   positionId String   @db.ObjectId
-  region     Region   @relation(fields: [regionId], references: [id])
+  region     Region   @relation(fields: [regionId], references: [id], onDelete: Cascade)
   regionId   String   @db.ObjectId
 }
 
@@ -41,7 +41,7 @@ model Zone {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String
 
-  region    Region      @relation(fields: [regionId], references: [id])
+  region    Region      @relation(fields: [regionId], references: [id], onDelete: Cascade)
   regionId  String      @db.ObjectId
   zoneNames ZoneNames[]
 }
@@ -49,9 +49,8 @@ model Zone {
 model ZoneNames {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   name   String @unique
-  zone   Zone   @relation(fields: [zoneId], references: [id])
+  zone   Zone   @relation(fields: [zoneId], references: [id], onDelete: Cascade)
   zoneId String @db.ObjectId
-  @@unique([name,zoneId])
 }
 
 model Position {

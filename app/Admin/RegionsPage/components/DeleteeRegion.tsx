@@ -1,11 +1,14 @@
-
+"use client"
 
 
 import React from 'react'
+import DeleteRegions from '../../components/DeleteRegions'
 
 const DeleteeRegion = () => {
   return (
-    <div>DeleteeRegion</div>
+    <div>
+      <DeleteRegions/>
+    </div>
   )
 }
 

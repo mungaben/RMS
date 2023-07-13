@@ -211,4 +211,20 @@ export type MyDataType = {
   comments: string;
   authorId?: string;
 };
+
+
+type Zone = {
+  id: string;
+  name: string;
+  regionId: string;
+};
+export type RegionDataTypes = {
+  id: string;
+  name: string;
+  zones: Zone[];
+};
   
+export interface PositionDataTypes {
+  id: string;
+  name: string;
+}

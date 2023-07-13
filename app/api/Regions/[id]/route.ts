@@ -19,6 +19,13 @@ export async function DELETE(req: NextRequest,{params}:{params:Idtype}, res: Nex
             }
         });
         // console.log("user available",RegionAvailable);
+        if(!RegionAvailable){
+            return NextResponse.json({
+                error: "region not found",
+                message: "Region not deleted",
+                statusbar: "error",
+            });
+        }
         
         if(RegionAvailable){
         const deleteRegion= await prismaDb.region.deleteMany({
@@ -28,9 +35,18 @@ export async function DELETE(req: NextRequest,{params}:{params:Idtype}, res: Nex
         });
        
         
-        return NextResponse.json({message: "Region deleted"});
+        return NextResponse.json({
+            message: "Region deleted",
+            statusbar: "success",
+            deleteRegion,
+        });
     }else{
-        return NextResponse.json({error: "region not found"});
+        return NextResponse.json({
+            error: "region not found",
+            message: "Region not deleted",
+            statusbar: "error",
+
+    });
     }
 
   

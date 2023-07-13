@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
     const body = await req.json();
-    const { name, zonename } = body;
+    const { name, id } = body;
  
 
     // find region name
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 statusbar: 'error',
             });
         }
-        if (!zonename) {
+        if (!id) {
             return NextResponse.json({
                 error: 'Zone id is required',
                 statusbar: 'error',
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
         const zone = await prismaDb.zone.findFirst({
             where: {
-                name: zonename,
+                id: id,
             },
         });
       
@@ -70,6 +70,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                         id: zone.id,
                     },
                 },
+
             },
         });
 
@@ -98,17 +99,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
+        // find data from db name ZoneNames
         const zonenames = await prismaDb.zoneNames.findMany({
-            include: {
-                zone: true,
-            },
         });
-        return NextResponse.json({
+    
+        if (!zonenames) {
+            return NextResponse.json({
+                error: 'ZoneNames does not exists',
+                statusbar: 'error',
+            });
+        }
+
+        
+        
+
+        return  NextResponse.json({
+            message: 'ZoneNames fetched successfully',
+            statusbar: 'success',
             zonenames,
         });
     } catch (error) {
         return NextResponse.json({
-            error: 'Error fetching zone',
+            error: 'Error fetching zoneNames',
             statusbar: 'error',
         });
     }

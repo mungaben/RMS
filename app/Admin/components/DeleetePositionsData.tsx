@@ -1,7 +1,13 @@
+
+
+
+
+
+
 "use client";
 
 import TableData from "@/app/ReportTables/components/TableData";
-import { RegionDataTypes, Zoneapi } from "@/app/ReportTables/components/Tabledata";
+import { PositionDataTypes, RegionDataTypes, Zoneapi } from "@/app/ReportTables/components/Tabledata";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { TableCell, TableRow } from "@/components/ui/table";
@@ -10,7 +16,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import useSWR from "swr";
 
-const DeleteData = ({ item, mutate }: { item:RegionDataTypes; mutate: any }) => {
+const DeletePositionData = ({ item, mutate }: { item:PositionDataTypes; mutate: any }) => {
   const url = `/api/Zones/${item.id}`;
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const [setloading, setsetloading] = useState(false);
@@ -23,7 +29,7 @@ const DeleteData = ({ item, mutate }: { item:RegionDataTypes; mutate: any }) => 
 
     try {
       setsetloading(true);
-      const response = await axios.delete(`/api/Regions/${id}`);
+      const response = await axios.delete(`/api/position/${id}`);
       mutate();
       // if (isLoading) {
       //   return <div>loading...</div>;
@@ -121,9 +127,9 @@ const DeleteData = ({ item, mutate }: { item:RegionDataTypes; mutate: any }) => 
             {item.name}
         </h2>
       </TableCell>
-      <TableCell>
-        <h2>{item.zones.length}</h2>
-      </TableCell>
+      {/* <TableCell>
+        <h2>{item.length}</h2>
+      </TableCell> */}
 
       {/* <td className=" mx-4">
         <Button
@@ -149,4 +155,4 @@ const DeleteData = ({ item, mutate }: { item:RegionDataTypes; mutate: any }) => 
   );
 };
 
-export default DeleteData;
+export default DeletePositionData;
