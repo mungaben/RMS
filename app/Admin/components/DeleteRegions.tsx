@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import useSWR from "swr";
-import { Zoneapi } from "@/app/ReportTables/components/Tabledata";
+import { RegionDataTypes, Zoneapi } from "@/app/ReportTables/components/Tabledata";
 
 
 import {
@@ -39,42 +39,6 @@ const DeleteZone = () => {
   }
   console.log("data in delete zone", data, error, isLoading);
 
-  const handleDelete = async (event: React.MouseEvent<HTMLElement>) => {
-    const id = (event.currentTarget as HTMLButtonElement).value;
-
-    try {
-      const response = await axios.delete(`/api/Regions/${id}`);
-      // if (isLoading) {
-      //   return <div>loading...</div>;
-      // }
-      // if(!data){
-      //   return <div>loading...</div>;
-      // }
-      // if data was succesfull mutate will update the data
-      if (response.data.statusbar === "success") {
-        toast.success(response.data.message);
-        mutate();
-      }
-      console.log(
-        "response in delete zone",
-        response.data,
-        response.data.statusbar
-      );
-
-      if (response.data.statusbar === "success") {
-        toast.success(response.data.message);
-      }
-
-      if (response.data.statusbar === "error") {
-        toast.error(response.data.error);
-      }
-    } catch (error) {
-      console.log("error in delete zone", error);
-      toast.error("something went wrong");
-    } finally {
-      //  setloading(false);
-    }
-  };
 
   return (
     <Table>
@@ -90,7 +54,7 @@ const DeleteZone = () => {
       <TableBody>
       
         {data &&
-          data?.result.map((item: Zoneapi) => (
+          data?.regions.map((item:RegionDataTypes) => (
             <TableRow key={item.id} >
               <DeleteRegionData item={item} mutate={mutate} />
             
