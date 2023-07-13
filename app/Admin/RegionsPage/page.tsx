@@ -4,10 +4,15 @@
 
 
 import React from 'react'
+import CreateRegion from './components/CreateRegion'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <div>
+        <CreateRegion/>
+      </div>
+    </div>
   )
 }
 

@@ -20,6 +20,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         if (!name) {
             return NextResponse.json({
                 error: 'Region name is required',
+                statusbar:'error'
             });
         }
         const region = await prismaDb.region.findFirst({
@@ -30,6 +31,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         if (region) {
             return NextResponse.json({
                 error: 'Region already exists',
+                statusbar:'error'
             });
         }else if(!region){
             const result = await prismaDb.region.create({
@@ -39,6 +41,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             });
             return NextResponse.json({
                 message: 'Region created successfully',
+                statusbar:'success',
                 result,
             });
         }
@@ -46,6 +49,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }catch (error) {
         return NextResponse.json({
             error: 'Something went wrong',
+            statusbar:'error'
         });
     }
 
@@ -61,6 +65,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
 export async function GET(req: NextRequest, res: NextResponse) {
 //    get regions and their zones
+
     const regions = await prismaDb.region.findMany({
         include: {
             zones: true,

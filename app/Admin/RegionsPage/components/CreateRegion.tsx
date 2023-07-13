@@ -5,10 +5,13 @@
 
 
 import React from 'react'
+import CreateRegions from '../../components/CreateRegions'
 
 const CreateRegion = () => {
   return (
-    <div>CreateRegion</div>
+    <div>
+      <CreateRegions/>
+    </div>
   )
 }
 
