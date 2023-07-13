@@ -11,9 +11,7 @@ const page = () => {
         <div className=' flex   flex-grow'>
         <AddZones/>
         </div>
-        <div>
-          <UpdateZone/>
-        </div>
+       
         <div>
           <DeleteZone/>
         </div>

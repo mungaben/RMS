@@ -1,8 +1,3 @@
-
-
-
-
-
 "use client";
 
 import SelectSystem from "@/app/DashBoard/components/Basis2/SelectSystem";
@@ -34,7 +29,7 @@ import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
 import SelectRegion from "@/app/DashBoard/components/Basis2/SelectedRegion";
 import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
 import { useToast } from "@/components/ui/use-toast";
-import error from '../../ReportTables/error';
+import error from "../../ReportTables/error";
 import toast from "react-hot-toast";
 
 const ModalStore = () => {
@@ -43,15 +38,22 @@ const ModalStore = () => {
   const setregion = useRegionStore((state) => state.setRegions);
   const region = useRegionStore((state) => state.regions);
 
-  const zoneEnum = ["Zone1", "Zone2", "Zone3", "Zone4", "Zone5", "Zone6"] as const;
-  type ZoneEnum = typeof zoneEnum[number];
-  
+  const zoneEnum = [
+    "Zone1",
+    "Zone2",
+    "Zone3",
+    "Zone4",
+    "Zone5",
+    "Zone6",
+  ] as const;
+  type ZoneEnum = (typeof zoneEnum)[number];
+
   const FormData = z.object({
-    name: z.enum(zoneEnum).refine(value => value !== undefined, {
+    name: z.enum(zoneEnum).refine((value) => value !== undefined, {
       message: "Please select a valid zone",
     }),
   });
-  
+
   type FormDataschema = z.infer<typeof FormData>;
 
   const form = useForm<FormDataschema>({
@@ -87,7 +89,6 @@ const ModalStore = () => {
       console.log("error in create zones", error);
       toast.error("something went wrong");
     } finally {
-     
       setloading(false);
     }
   };
@@ -97,48 +98,48 @@ const ModalStore = () => {
 
   return (
     <div className="w-full  flex flex-col mr-5  ">
-    <Card className=" px-5">
-      <div className="">
-        <CardHeader className="">
-          <SelectRegion />
-        </CardHeader>
-        <CardContent className="py-2 pb-4 space-y-4  w-full">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(Onsubmit)}>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nmae</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={loading}
-                        placeholder="Regionname"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+      <Card className=" px-5">
+        <div className="">
+          <CardHeader className="">
+            <SelectRegion />
+          </CardHeader>
+          <CardContent className="py-2 pb-4 space-y-4  w-full">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(Onsubmit)}>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nmae</FormLabel>
+                      <FormControl>
+                        <Input
+                          disabled={loading}
+                          placeholder="Regionname"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <div className="flex items-center justify-end w-full pt-6 space-x-2 ">
-                {/* <Button disabled={loading} variant="outline">
+                <div className="flex items-center justify-end w-full pt-6 space-x-2 ">
+                  {/* <Button disabled={loading} variant="outline">
                   cancel
                 </Button> */}
-                <Button disabled={loading} type="submit" variant="secondary">
-                  continue
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </CardContent>
-      </div>
-      <CardFooter>
-        <p>update zones</p>
-      </CardFooter>
-    </Card>
+                  <Button disabled={loading} type="submit" variant="secondary">
+                    continue
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </CardContent>
+        </div>
+        <CardFooter>
+          <p>update zones</p>
+        </CardFooter>
+      </Card>
     </div>
   );
 };
