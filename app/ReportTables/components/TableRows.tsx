@@ -16,12 +16,11 @@ const TableRows = () => {
   const TableData = useTableDatastore((state) => state.tableData);
   const [disbaled, setdisbaled] = useState(false);
   const [disabledButtons, setDisabledButtons] = useState<string[]>([]);
-// from db if db contains data for presnt date from date value with the same key disbale the button 
-// if db for new date .getdate() for today has data for the keys then set value of the keys
+  // from db if db contains data for presnt date from date value with the same key disbale the button
+  // if db for new date .getdate() for today has data for the keys then set value of the keys
   //   map it
   const handlePOstData = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-
 
     // get data from store
     console.log("Tabledata", TableData);
@@ -38,7 +37,7 @@ const TableRows = () => {
     if (tabledatalength === 9) {
       setDisabledButtons((prevDisabledButtons) => [
         ...prevDisabledButtons,
-        value
+        value,
       ]);
       toast.success("Saved Successfully");
     } else if (tabledatalength < 9) {
@@ -63,7 +62,11 @@ const TableRows = () => {
             )
           )}
           <td>
-            <Button onClick={handlePOstData}  disabled={disabledButtons.includes(key)} value={key}>
+            <Button
+              onClick={handlePOstData}
+              disabled={disabledButtons.includes(key)}
+              value={key}
+            >
               Save
             </Button>
           </td>
