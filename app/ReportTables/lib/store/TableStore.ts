@@ -50,12 +50,12 @@ const useTableStore = create<TableStore>((set) => ({
   tableRowData: tableData,
   tablecellData: tableData.flatMap((row) => row.cells),
   setRowData: (rowData) => {
-    console.log("rowData", rowData);
+    // console.log("rowData", rowData);
     
     set({ tableRowData: rowData });
   },
   setCellData: (cellData) => {
-    console.log("cellData", cellData);
+    // console.log("cellData", cellData);
     
     set({ tablecellData: cellData });
   },
