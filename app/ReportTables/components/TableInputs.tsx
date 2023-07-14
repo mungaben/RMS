@@ -15,10 +15,7 @@ interface TableInputsProps {
 const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
 
 
-  console.log("table inputs",id,name);
-  
   const [inputValue, setInputValue] = useState("");
-
 
   const setCellData = useTableStore((state) => state.setCellData);
   const tablecellData = useTableStore((state) => state.tablecellData);
@@ -27,8 +24,9 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    console.log("value from inputs",value);
-    
+    const time = e.target.id;
+    const systemName = e.target.name;
+    console.log("value from inputs", value, time, systemName);
 
     if (value === "" || (parseInt(value) >= 0 && parseInt(value) <= 5)) {
       setInputValue(value);
@@ -41,19 +39,16 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
             }
             return cell;
           });
-          console.log(
-          "updated cell from inputs updates",updatedCells
-          );
-          
+      
 
           return { ...row, cells: updatedCells };
         }
-        console.log("row",row);
-        
+      
+
         return row;
       });
-      console.log("updated row data tahts set to rowdata in store",updatedRowData);
-      
+    
+
       setRowData(updatedRowData);
 
       setCellData(updatedRowData.flatMap((row) => row.cells));
