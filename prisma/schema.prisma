@@ -22,6 +22,9 @@ model User {
   email     String   @unique
   name      String?
   myNumber  String   @unique
+  password  String
+
+  Tabledata TableData[]
 
   role       Role     @default(USER)
   position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
@@ -57,4 +60,19 @@ model Position {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name  String
   users User[]
+}
+
+model TableData {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  value      String
+  time       String
+  date       DateTime @default(now())
+  UpdatedAt  DateTime @updatedAt
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String   @db.ObjectId @unique
+  zone       String?
+  systemName String
+  TimeNow    DateTime
+  disabled   Boolean
 }
