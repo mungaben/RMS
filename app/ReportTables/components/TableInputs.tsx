@@ -6,6 +6,7 @@ import React, { use, useState } from "react";
 import useTableStore from "../lib/store/TableStore";
 import { FromTime } from "./Tabledata";
 import { TableData, useTableDatastore } from "../lib/store/TableDatastore";
+import toast from "react-hot-toast";
 
 interface TableInputsProps {
   id: FromTime;
@@ -25,6 +26,14 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
   const TableData = useTableDatastore((state) => state.tableData);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    // check if value is either 0 ,=5 or five if it is continue else retun none
+
+  //  value  be between 0 to 5
+
+    if (parseInt(e.target.value) >= 0 && parseInt(e.target.value) <= 5) {
+
+
     console.log("value data", e.target.value,typeof (e.target.value));
     
     const value = e.target.value;
@@ -36,6 +45,7 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
     } else {
       setfilled(false);
     }
+
     const dataToAdd: TableData[] = [
       {
         value: parseInt(value),
@@ -55,8 +65,8 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
       const data = TableData.filter((data) => {
         return (
           data.time === time &&
-          data.systemName === systemName &&
-          data.TimeNow.getDate() === new Date().getDate()
+          data.systemName === systemName 
+        
         );
       });
       if (data.length > 0) {
@@ -64,6 +74,8 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
       } else {
         dataToAdd[0].value = parseInt(value);
       }
+      console.log("data cahnged on changing ", data);
+      
     } else {
       dataToAdd[0].value = parseInt(value);
     }
@@ -99,6 +111,9 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
 
       setCellData(updatedRowData.flatMap((row) => row.cells));
     }
+  }else{
+    toast.error("Please enter a number between 0 to 5");
+  }
   };
 
   return (

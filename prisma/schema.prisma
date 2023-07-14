@@ -69,8 +69,8 @@ model TableData {
   time       String
   date       DateTime @default(now())
   UpdatedAt  DateTime @updatedAt
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId     String   @db.ObjectId @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String   @unique @db.ObjectId
   zone       String?
   systemName String
   TimeNow    DateTime
