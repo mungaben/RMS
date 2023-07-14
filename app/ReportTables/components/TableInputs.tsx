@@ -26,94 +26,86 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
   const TableData = useTableDatastore((state) => state.tableData);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     // check if value is either 0 ,=5 or five if it is continue else retun none
 
-  //  value  be between 0 to 5
+    //  value  be between 0 to 5
 
     if (parseInt(e.target.value) >= 0 && parseInt(e.target.value) <= 5) {
+      console.log("value data", e.target.value, typeof e.target.value);
 
+      const value = e.target.value;
+      const time = e.target.id;
+      const systemName = e.target.name;
+      // if value not nan then set filled to true else if value changes to none or empy set filled to false not  null  and not undefined
+      if (parseInt(value) >= 0 && value !== "" && value !== undefined) {
+        setfilled(true);
+      } else {
+        setfilled(false);
+      }
 
-    console.log("value data", e.target.value,typeof (e.target.value));
-    
-    const value = e.target.value;
-    const time = e.target.id;
-    const systemName = e.target.name;
-    // if value not nan then set filled to true else if value changes to none or empy set filled to false not  null  and not undefined
-    if (parseInt(value) >= 0 && value !== "" && value !== undefined) {
-      setfilled(true);
-    } else {
-      setfilled(false);
-    }
+      const dataToAdd: TableData[] = [
+        {
+          value: parseInt(value),
+          time: time,
+          systemName,
+          TimeNow: new Date(),
+          disabled: false,
+        },
+      ];
+      console.log("dataToAdd b4 manupulating", TableData);
 
-    const dataToAdd: TableData[] = [
-      {
-        value: parseInt(value),
-        time: time,
-        systemName,
-        TimeNow: new Date(),
-        disabled: false,
-      },
-    ];
-    console.log("dataToAdd b4 manupulating", TableData);
+      // check if data exists  in TableData by time,systemName,and Timenow  date is today  change that data
 
-    // check if data exists  in TableData by time,systemName,and Timenow  date is today  change that data
+      // from timenow what is today date
 
-    // from timenow what is today date
-
-    if (TableData.length > 0) {
-      const data = TableData.filter((data) => {
-        return (
-          data.time === time &&
-          data.systemName === systemName 
-        
-        );
-      });
-      if (data.length > 0) {
-        data[0].value = parseInt(value);
+      if (TableData.length > 0) {
+        const data = TableData.filter((data) => {
+          return data.time === time && data.systemName === systemName;
+        });
+        if (data.length > 0) {
+          data[0].value = parseInt(value);
+        } else {
+          dataToAdd[0].value = parseInt(value);
+        }
+        console.log("data cahnged on changing ", data);
       } else {
         dataToAdd[0].value = parseInt(value);
       }
-      console.log("data cahnged on changing ", data);
-      
+
+      console.log("TableData after manpulating", TableData);
+
+      //  add data to already existing data   in setTableData add it to the table
+      setTableData([...TableData, ...dataToAdd]);
+
+      console.log("after adding", TableData);
+
+      console.log("value from inputs", value, time, systemName);
+
+      if (value === "" || (parseInt(value) >= 0 && parseInt(value) <= 5)) {
+        setInputValue(value);
+
+        const updatedRowData = tablerowData.map((row) => {
+          if (row.id === id) {
+            const updatedCells = row.cells.map((cell) => {
+              if (cell.name === name) {
+                return { ...cell, value: Number(value) };
+              }
+              return cell;
+            });
+
+            return { ...row, cells: updatedCells };
+          }
+
+          return row;
+        });
+
+        setRowData(updatedRowData);
+
+        setCellData(updatedRowData.flatMap((row) => row.cells));
+      }
     } else {
-      dataToAdd[0].value = parseInt(value);
+      toast.error("Please enter a number between 0 to 5");
     }
-
-    console.log("TableData after manpulating", TableData);
-
-    //  add data to already existing data   in setTableData add it to the table
-    setTableData([...TableData, ...dataToAdd]);
-
-    console.log("after adding", TableData);
-
-    console.log("value from inputs", value, time, systemName);
-
-    if (value === "" || (parseInt(value) >= 0 && parseInt(value) <= 5)) {
-      setInputValue(value);
-
-      const updatedRowData = tablerowData.map((row) => {
-        if (row.id === id) {
-          const updatedCells = row.cells.map((cell) => {
-            if (cell.name === name) {
-              return { ...cell, value: Number(value) };
-            }
-            return cell;
-          });
-
-          return { ...row, cells: updatedCells };
-        }
-
-        return row;
-      });
-
-      setRowData(updatedRowData);
-
-      setCellData(updatedRowData.flatMap((row) => row.cells));
-    }
-  }else{
-    toast.error("Please enter a number between 0 to 5");
-  }
   };
 
   return (
