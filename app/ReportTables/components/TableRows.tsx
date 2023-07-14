@@ -15,10 +15,14 @@ const TableRows = () => {
   const storedata = useTableStore((state) => state.tableRowData);
   const TableData = useTableDatastore((state) => state.tableData);
   const [disbaled, setdisbaled] = useState(false);
-
+  const [disabledButtons, setDisabledButtons] = useState<string[]>([]);
+// from db if db contains data for presnt date from date value with the same key disbale the button 
+// if db for new date .getdate() for today has data for the keys then set value of the keys
   //   map it
   const handlePOstData = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
+
+
     // get data from store
     console.log("Tabledata", TableData);
     const value = (event.target as HTMLInputElement).value;
@@ -32,7 +36,10 @@ const TableRows = () => {
     const tabledatalength = filteredTableData.length;
     console.log("Tabledatalength", tabledatalength);
     if (tabledatalength === 9) {
-      setdisbaled(true);
+      setDisabledButtons((prevDisabledButtons) => [
+        ...prevDisabledButtons,
+        value
+      ]);
       toast.success("Saved Successfully");
     } else if (tabledatalength < 9) {
       toast.error("Please Fill All Fields");
@@ -56,7 +63,7 @@ const TableRows = () => {
             )
           )}
           <td>
-            <Button onClick={handlePOstData} value={key}>
+            <Button onClick={handlePOstData}  disabled={disabledButtons.includes(key)} value={key}>
               Save
             </Button>
           </td>
