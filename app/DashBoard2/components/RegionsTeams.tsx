@@ -54,6 +54,7 @@ import {
 import { EnumRegions, Regions, regionsArray } from "@/app/ReportTables/components/TableSettlemets"
 import { RegionDataTypes } from "@/app/ReportTables/components/Tabledata"
 import Link from "next/link"
+import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore"
 
 
 const groups = [
@@ -91,6 +92,7 @@ export default function RegionsTeams({ className }: TeamSwitcherProps) {
   const [open, setOpen] = React.useState(false)
   const [showNewTeamDialog, setShowNewTeamDialog] = React.useState(false)
   const [selectedTeam, setSelectedTeam] = React.useState<EnumRegions>()
+  const setRegion=useRegionStore(state=>state.setRegions)
 
   return (
     <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>
@@ -126,6 +128,7 @@ export default function RegionsTeams({ className }: TeamSwitcherProps) {
                       key={key}
                       onSelect={() => {
                         setSelectedTeam(team)
+                        setRegion(team)
                         setOpen(false)
                       }}
                       className="text-sm"
