@@ -10,6 +10,10 @@ import useTableStore from "../lib/store/TableStore";
 import { useTableDatastore } from "../lib/store/TableDatastore";
 import toast from "react-hot-toast";
 import axios from "axios";
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 const TableRows = () => {
   const fromTimeArray = Object.entries(FromTime);
@@ -45,9 +49,7 @@ const TableRows = () => {
     const formattedTime = timeDtae.toLocaleTimeString("en-US", {  hour: "2-digit",
     minute: "2-digit",
     hour12: false });
-    console.log("formatted time", formattedTime.split(':'));
-    const formattedTimeValue = formattedTime.split(':')[0] 
-    console.log("formatted time value", formattedTimeValue);
+    
     
 
 
@@ -61,17 +63,25 @@ const TableRows = () => {
       hour12: false
   
     });
-    console.log("current time", currenttime.split(':').join(""),formattedTime.split(':').join(""));
-    const currenttimeValue =parseInt(currenttime.split(':')[0])+ (parseInt(currenttime.split(':')[1]))/100 
-    console.log("current time value", currenttimeValue);
+    console.log("current time", currenttime,formattedTime);
+    // const timeDiff =parseInt(currenttime)-parseInt(formattedTime)
+    const timeDiff=dayjs(currenttime,"HH:mm").diff(dayjs(formattedTime,"HH:mm"), 'minute')
+  
+    const isWithinRange = timeDiff >= -30 && timeDiff <= 30;
+
+    console.log("Is within range:", isWithinRange);
+
+    console.log("time diff",timeDiff);
+  
+
     // check if time is less  30 or past 30 minutes to current time  crazy logic
-    const timeDiff =Math.abs(parseInt((currenttimeValue- parseInt(formattedTimeValue)).toFixed(2).split('.')[0]))===0
-    const secondpart= Math.abs(parseInt((currenttimeValue- parseInt(formattedTimeValue)).toFixed(2).split('.')[1]))<=30
+    // const timeDiff =Math.abs(parseInt((currenttimeValue- parseInt(formattedTimeValue)).toFixed(2).split('.')[0]))===0
+    // const secondpart= Math.abs(parseInt((currenttimeValue- parseInt(formattedTimeValue)).toFixed(2).split('.')[1]))<=30
     // if time is more tahn 30 or less tahn current time  then true
     // const timeDiff2 = Math.abs(parseInt((currenttimeValue- parseInt(formattedTimeValue)).toFixed(2).split('.')[0]))>30
 
     // const timeDifferent = timeDiff > 0.30 || timeDiff < -0.30
-    console.log("time diff", timeDiff,"Table.tsx",secondpart);
+    // console.log("time diff", timeDiff,"Table.tsx",secondpart);
     
 
     const filteredTableData = TableData.filter((data) => data.time === value);
