@@ -50,7 +50,7 @@ const SystemHealth: React.FC<SystemHealthProps> = ({ System }) => {
   }, [tabledatas]);
 
   useEffect(() => {
-    console.log("time set in the graph in system Health", dashboard);
+ 
     Basis2Data();
   }, []);
 

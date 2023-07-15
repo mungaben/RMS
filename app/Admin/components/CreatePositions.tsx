@@ -56,7 +56,7 @@ const CreatePosts = () => {
     },
   });
   const Onsubmit = async (data: FormDataschema) => {
-    console.log("data in Create zones", data);
+  
     const dataPost = {
       name: data.name,
     

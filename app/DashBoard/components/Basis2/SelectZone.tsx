@@ -37,10 +37,8 @@ const SelectZoneData = () => {
   const setZone = useZoneStore((state) => state.setZones);
   const Zonename = useZoneNameStore((state) => state.zoneNames);
  const setZoneName=useZoneNameStore((state)=>state.setZones);
-  console.log("zonename in select zone", Zonename);
-  if (data) {
-    console.log("data in select zone", data);
-  }
+
+  
 
   const handleSelectChange = (value: string) => {
     setSelectedOption(value);

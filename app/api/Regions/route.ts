@@ -89,7 +89,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             name,
         },
     });
-    console.log(result);
+
     
     return NextResponse.json(result);
 }

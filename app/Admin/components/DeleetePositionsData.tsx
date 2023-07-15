@@ -42,17 +42,17 @@ const DeletePositionData = ({ item, mutate }: { item:PositionDataTypes; mutate: 
         toast.success(response.data.message);
       }
 
-      console.log(
-        "response in delete zone",
-        response.data,
-        response.data.statusbar
-      );
+      // console.log(
+      //   "response in delete zone",
+      //   response.data,
+      //   response.data.statusbar
+      // );
 
       if (response.data.statusbar === "error") {
         toast.error(response.data.error);
       }
     } catch (error) {
-      console.log("error in delete zone", error);
+
       toast.error("something went wrong");
       setsetloading(false);
     } finally {
@@ -67,10 +67,10 @@ const DeletePositionData = ({ item, mutate }: { item:PositionDataTypes; mutate: 
     // if not return error toast
     // if yes then update
     // Extract or define the valid zone names
-    console.log("item in delete data", item, item.name);
+
 
     const validZoneNames = item.name; // Assuming `item` contains the relevant data
-    console.log("validZoneNames", validZoneNames);
+
 
     // Check if zonename is a valid zone name
     if (!validZoneNames.includes(zonename)) {
@@ -93,17 +93,17 @@ const DeletePositionData = ({ item, mutate }: { item:PositionDataTypes; mutate: 
         toast.success(response.data.message);
       }
 
-      console.log(
-        "response in delete zone",
-        response.data,
-        response.data.statusbar
-      );
+      // console.log(
+      //   "response in delete zone",
+      //   response.data,
+      //   response.data.statusbar
+      // );
 
       if (response.data.statusbar === "error") {
         toast.error(response.data.error);
       }
     } catch (error) {
-      console.log("error in delete Region ", error);
+
       toast.error("something went wrong");
       setsetloading(false);
     } finally {

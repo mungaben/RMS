@@ -37,7 +37,7 @@ const DeleteZone = () => {
   if (isLoading) {
     return <div>loading...</div>;
   }
-  console.log("data in delete zone", data, error, isLoading);
+
 
 
   return (

@@ -53,7 +53,7 @@ const CreateRegions = () => {
     },
   });
   const Onsubmit = async (data: FormDataschema) => {
-    console.log("data in Create zones", data);
+
     const dataPost = {
       name: data.name,
     
@@ -62,11 +62,11 @@ const CreateRegions = () => {
     try {
       setloading(true);
       const response = await axios.post("/api/Regions", dataPost);
-      console.log(
-        "response in create zones",
-        response.data,
-        response.data.statusbar
-      );
+      // console.log(
+      //   "response in create zones",
+      //   response.data,
+      //   response.data.statusbar
+      // );
 
       if (response.data.statusbar === "success") {
         toast.success(response.data.message);

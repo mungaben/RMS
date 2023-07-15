@@ -38,7 +38,7 @@ const DeletePositions = () => {
   if (isLoading) {
     return <div>loading...</div>;
   }
-  console.log("data in delete zone", data, error, isLoading);
+
 
   const handleDelete = async (event: React.MouseEvent<HTMLElement>) => {
     const id = (event.currentTarget as HTMLButtonElement).value;
@@ -56,11 +56,11 @@ const DeletePositions = () => {
         toast.success(response.data.message);
         mutate();
       }
-      console.log(
-        "response in delete zone",
-        response.data,
-        response.data.statusbar
-      );
+      // console.log(
+      //   "response in delete zone",
+      //   response.data,
+      //   response.data.statusbar
+      // );
 
       if (response.data.statusbar === "success") {
         toast.success(response.data.message);
@@ -70,7 +70,7 @@ const DeletePositions = () => {
         toast.error(response.data.error);
       }
     } catch (error) {
-      console.log("error in delete zone", error);
+  
       toast.error("something went wrong");
     } finally {
       //  setloading(false);
