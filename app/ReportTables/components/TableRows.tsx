@@ -65,11 +65,11 @@ const TableRows = () => {
     });
     console.log("current time", currenttime,formattedTime);
     // const timeDiff =parseInt(currenttime)-parseInt(formattedTime)
-    const timeDiff=dayjs(currenttime,"HH:mm").diff(dayjs(formattedTime,"HH:mm"), 'minute')
+    const timeDiffs=dayjs(currenttime,"HH:mm").diff(dayjs(formattedTime,"HH:mm"), 'minute')
   
-    const isWithinRange = timeDiff >= -30 && timeDiff <= 30;
+    const timeDiff= timeDiffs >= -30 && timeDiffs<= 30;
 
-    console.log("Is within range:", isWithinRange);
+    console.log("Is within range:", timeDiff);
 
     console.log("time diff",timeDiff);
   

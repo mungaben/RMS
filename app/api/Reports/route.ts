@@ -31,6 +31,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
   
     for (let i = 0; i < body.length; i++) {
       const { value, time, systemName, TimeNow, disabled } = body[i];
+      if (!value || !time || !systemName || !TimeNow || !disabled) {
+        return NextResponse.json({
+          message: "Missing required fields",
+          statusbar:"error"
+
+        });
+      }
+
+
+
+
       dataToCreate.push({
         value,
         time,
@@ -51,6 +62,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
      })
     } catch (error) {
       console.error("Error creating records:", error);
+      return NextResponse.json({
+        message: "Error creating records",
+        statusbar:"error"
+      });
     
     }
   }
@@ -62,7 +77,13 @@ export async function GET(req:NextRequest,res:NextResponse){
     const result= await prismaDb.tableData.findMany()
     console.log("result",result);
     
-    return NextResponse.json( {message:"sucesss",result})
+    return NextResponse.json( {
+      
+      message:"sucesss",
+      statusbar:"sucess",
+      result 
+  })
+
 }
 
   
