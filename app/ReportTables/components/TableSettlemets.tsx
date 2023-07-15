@@ -211,7 +211,7 @@ export type EnumRegions = "westernRegion" | "southernRegion" | "northEasternRegi
 
 
 
-enum RegionEnum {
+export enum RegionEnum {
   WesternRegion = "WesternRegion",
   SouthernRegion = "SouthernRegion",
   NorthEasternRegion = "NorthEasternRegion",
@@ -220,4 +220,13 @@ enum RegionEnum {
   CentralRegion = "CentralRegion",
   InformalSettlements = "InformalSettlements",
 }
+export const regionsArray: EnumRegions[] = [
+  "westernRegion",
+  "southernRegion",
+  "northEasternRegion",
+  "northernRegion",
+  "easternRegion",
+  "centralRegion",
+  "informalSettlements",
+];
 
