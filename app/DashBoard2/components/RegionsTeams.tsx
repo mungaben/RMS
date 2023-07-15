@@ -5,56 +5,41 @@
 
 "use client"
 
-import * as React from "react"
 import {
-  CaretSortIcon,
-  CheckIcon,
-  PlusCircledIcon,
+    CaretSortIcon,
+    CheckIcon,
+    PlusCircledIcon,
 } from "@radix-ui/react-icons"
+import * as React from "react"
 
-import { cn } from "@/lib/utils"
+import { EnumRegions, regionsArray } from "@/app/ReportTables/components/TableSettlemets"
+import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore"
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
 } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandSeparator,
 } from "@/components/ui/command"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+    Dialog,
+    DialogTrigger
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from "@/components/ui/popover"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { EnumRegions, Regions, regionsArray } from "@/app/ReportTables/components/TableSettlemets"
-import { RegionDataTypes } from "@/app/ReportTables/components/Tabledata"
+import { cn } from "@/lib/utils"
 import Link from "next/link"
-import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore"
 
 
 const groups = [

@@ -7,6 +7,7 @@ import useTableStore from "../lib/store/TableStore";
 import { FromTime } from "./Tabledata";
 import { TableData, useTableDatastore } from "../lib/store/TableDatastore";
 import toast from "react-hot-toast";
+import { useRegionStore } from "../lib/store/RegionStore";
 
 interface TableInputsProps {
   id: FromTime;
@@ -24,6 +25,7 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
   const [filled, setfilled] = useState(false);
   const setTableData = useTableDatastore((state) => state.setTableData);
   const TableData = useTableDatastore((state) => state.tableData);
+  const region=useRegionStore(state=>state.regions);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // check if value is either 0 ,=5 or five if it is continue else retun none
@@ -50,6 +52,7 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
           systemName,
           TimeNow: new Date(),
           disabled: false,
+          region:region
         },
       ];
   
