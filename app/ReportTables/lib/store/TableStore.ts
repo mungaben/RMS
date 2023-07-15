@@ -19,11 +19,11 @@ enum FromTime {
   from_0900AM,
   from_1000AM,
   from_1100AM,
-  from_1200AM,
-  from_1300AM,
-  from_1400AM,
-  from_1500AM,
-  from_1600AM,
+  from_1200PM,
+  from_1300PM,
+  from_1400PM,
+  from_1500PM,
+  from_1600PM,
 }
 
 interface TableCell {
