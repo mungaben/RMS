@@ -43,7 +43,7 @@ export const TableHeadData:TableHeadDatas[] = [
   ];
 
 
-
+// looping table head
   export const TablecellObjects = {
     1: "Basis2",
     2: "INTERFACE",
@@ -75,11 +75,11 @@ export enum FromTime {
   from_0900AM = "from_0900AM",
   from_1000AM = "from_1000AM",
   from_1100AM = "from_1100AM",
-  from_1200AM = "from_1200AM",
-  from_1300AM = "from_1300AM",
-  from_1400AM = "from_1400AM",
-  from_1500AM = "from_1500AM",
-  from_1600AM = "from_1600AM",
+  from_1200PM = "from_1200PM",
+  from_1300PM = "from_1300PM",
+  from_1400PM = "from_1400PM",
+  from_1500PM = "from_1500PM",
+  from_1600PM = "from_1600PM",
 }
 
 interface TableCell {
@@ -123,33 +123,33 @@ export const tableData: TableRow[] = [
     cells: tableData1
   },
   {
-    id: FromTime.from_1200AM,
+    id: FromTime.from_1200PM,
     cells: tableData1
   },
   {
-    id: FromTime.from_1300AM,
+    id: FromTime.from_1300PM,
     cells: tableData1
   },
   // add 4 more rows
   {
-    id: FromTime.from_1400AM,
+    id: FromTime.from_1400PM,
     cells: tableData1
   },
 
   {
-    id: FromTime.from_1500AM,
+    id: FromTime.from_1500PM,
     cells: tableData1
   },
   {
-    id: FromTime.from_1500AM,
+    id: FromTime.from_1500PM,
     cells: tableData1
   },
   {
-    id: FromTime.from_1500AM,
+    id: FromTime.from_1500PM,
     cells: tableData1
   },
   {
-    id: FromTime.from_1600AM,
+    id: FromTime.from_1600PM,
     cells: tableData1
   },
 
@@ -228,3 +228,20 @@ export interface PositionDataTypes {
   id: string;
   name: string;
 }
+
+
+
+
+
+export type TableDataCreateManyInput = {
+  id?: string;
+  value: number;
+  time: string;
+  date?: Date;
+  UpdatedAt?: Date;
+  userId ?: string;
+  zone?: string | null;
+  systemName: string;
+  TimeNow: Date;
+  disabled: boolean;
+};

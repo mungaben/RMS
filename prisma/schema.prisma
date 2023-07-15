@@ -64,13 +64,12 @@ model Position {
 
 model TableData {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  value      String
+  value      Int
   time       String
   date       DateTime @default(now())
   UpdatedAt  DateTime @updatedAt
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId     String   @unique @db.ObjectId
+  user       User  ?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String ?  @unique @db.ObjectId
   zone       String?
   systemName String
   TimeNow    DateTime
