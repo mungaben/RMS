@@ -10,7 +10,7 @@ type ZoneName = {
 // delete  zone name with zonenameid
 export async function DELETE(req: NextRequest, { params }: { params: ZoneName }, res: NextResponse) {
     const { id } = params;
-    console.log("zonename id", id);
+  
     try {
         // check if is empty
         if (!id) {
@@ -77,7 +77,7 @@ export async function PUT(req: NextRequest, { params }: { params: ZoneName }, re
     const body = await req.json();
     const { id } = params;
     const { name } = body;
-    console.log("zonename id", id);
+;
     try {
         // check if is empty
         if (!id) {

@@ -27,7 +27,7 @@ const AllDatas = () => {
       data,
     };
   }, [TableHeadData, TablecellData]);
-  console.log(dataAvail.data);
+
   return (
     <Card className=" my-4 p-4  ">
       <div className=" flex flex-col m-2 ">

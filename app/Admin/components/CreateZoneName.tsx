@@ -42,7 +42,7 @@ const CreateZoneName = () => {
   const zoneName=useZoneNameStore((state)=>state.zoneNames)
 
 
-  console.log("zoneName in create zone name",zoneName);
+;
   
   const FormData = z.object({
     name: z.string().min(2).refine(value => value !== undefined, {
@@ -59,7 +59,7 @@ const CreateZoneName = () => {
     },
   });
   const Onsubmit = async (data: FormDataschema) => {
-    console.log("data in Create zones", data, region);
+
     const dataPost = {
       name: data.name,
       id: zoneName,
@@ -68,11 +68,11 @@ const CreateZoneName = () => {
     try {
       setloading(true);
       const response = await axios.post("/api/ZoneNames", dataPost);
-      console.log(
-        "response in create zones",
-        response.data,
-        response.data.statusbar
-      );
+      // console.log(
+      //   "response in create zones",
+      //   response.data,
+      //   response.data.statusbar
+      // );
 
       if (response.data.statusbar === "success") {
         toast.success(response.data.message);
@@ -82,7 +82,7 @@ const CreateZoneName = () => {
         toast.error(response.data.error);
       }
     } catch (error) {
-      console.log("error in create zones", error);
+
       toast.error("something went wrong");
     } finally {
      
@@ -90,7 +90,7 @@ const CreateZoneName = () => {
     }
   };
   useEffect(() => {
-    console.log("region in create zones", region);
+
   }, [region]);
 
   return (

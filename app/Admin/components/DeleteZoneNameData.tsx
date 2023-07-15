@@ -42,17 +42,17 @@ const DeleteZoneNameData = ({
         toast.success(response.data.message);
       }
 
-      console.log(
-        "response in delete zone",
-        response.data,
-        response.data.statusbar
-      );
+      // console.log(
+      //   "response in delete zone",
+      //   response.data,
+      //   response.data.statusbar
+      // );
 
       if (response.data.statusbar === "error") {
         toast.error(response.data.error);
       }
     } catch (error) {
-      console.log("error in delete zone", error);
+  
       toast.error("something went wrong");
       setsetloading(false);
     } finally {

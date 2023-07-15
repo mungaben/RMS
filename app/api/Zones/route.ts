@@ -140,7 +140,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             });
         }
         // check if zone already exists
-        console.log("posted data", name, regionname);
+
 
         // get region id from region name
         const region = await prismaDb.region.findFirst({
@@ -153,7 +153,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
                 },
             },
         });
-        console.log("region  with such id exists", region);
+   
 
         if (!region) {
             return NextResponse.json({
@@ -168,7 +168,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
                 name: regionname,
             },
         });
-        console.log("regiondata", regiondata);
+     
 
         if (!regiondata) {
             return NextResponse.json({
@@ -200,7 +200,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
                 regionId: regiondata.id,
             },
         });
-        console.log("result", result);
+
 
 
         return NextResponse.json({
@@ -247,7 +247,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         });
 
 
-        console.log("result", result);
+      
         return NextResponse.json({
             result,
             statusbar: 'success',

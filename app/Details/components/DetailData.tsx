@@ -64,7 +64,7 @@ const DetailData = () => {
     };
   }, [TableHeadData, TablecellData]);
 
-  console.log("dataAvail", dataAvail);
+
 
   return (
     <div>

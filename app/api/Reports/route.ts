@@ -55,7 +55,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       const result = await prismaDb.tableData.createMany({
         data: dataToCreate,
       });
-      console.log("result", result);
+
      return NextResponse.json({
         message:"sucess",
         result
@@ -75,7 +75,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 //   query all data
 export async function GET(req:NextRequest,res:NextResponse){
     const result= await prismaDb.tableData.findMany()
-    console.log("result",result);
+
     
     return NextResponse.json( {
       

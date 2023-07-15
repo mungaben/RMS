@@ -11,11 +11,11 @@ type paramsid={
 }
 
 const TableDta:React.FC<paramsid> = ({params}) => {
-    console.log(params.id)
+
     const tabledata=useTableStore((state) => state.tableRowData);
     // get all data with id
     const data=tabledata?.filter((item)=>item).map((item)=>item.cells.filter((cell)=>cell.name===params.id))
-    console.log(data);
+ 
 
 
     const dataAvail = useMemo(() => {

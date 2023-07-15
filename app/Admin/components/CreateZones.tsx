@@ -51,7 +51,7 @@ const ModalStore = () => {
     },
   });
   const Onsubmit = async (data: FormDataschema) => {
-    console.log("data in Create zones", data, region);
+
     const dataPost = {
       name: data.name,
       regionname: region,
@@ -60,11 +60,11 @@ const ModalStore = () => {
     try {
       setloading(true);
       const response = await axios.post("/api/Zones", dataPost);
-      console.log(
-        "response in create zones",
-        response.data,
-        response.data.statusbar
-      );
+      // console.log(
+      //   "response in create zones",
+      //   response.data,
+      //   response.data.statusbar
+      // );
 
       if (response.data.statusbar === "success") {
         toast.success(response.data.message);
@@ -74,7 +74,7 @@ const ModalStore = () => {
         toast.error(response.data.error);
       }
     } catch (error) {
-      console.log("error in create zones", error);
+
       toast.error("something went wrong");
     } finally {
      
@@ -82,7 +82,7 @@ const ModalStore = () => {
     }
   };
   useEffect(() => {
-    console.log("region in create zones", region);
+
   }, [region]);
 
   return (

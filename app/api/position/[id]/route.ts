@@ -88,7 +88,7 @@ export async function PUT(req: NextRequest, { params }: { params: positionprops 
     const body = await req.json();
     const { id } = params;
     const { name } = body;
-    console.log("position id", id);
+  
     try {
         // if position is empty
         if (!id) {

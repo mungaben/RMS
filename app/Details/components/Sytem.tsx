@@ -7,7 +7,7 @@ import DetailData from './DetailData'
 const Sytem = () => {
 
     useEffect(() => {
-        console.log('Sytem')
+  
     }, [])
 
   return (

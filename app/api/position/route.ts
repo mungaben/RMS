@@ -17,7 +17,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     
         const { name } = body;
     
-        console.log("posted data", name,);
+  
     try {
         // check if is empty
         if (!name) {
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             });
         }
         // check if position already exists
-        console.log("posted data", name);
+  
         const positionexists = await prismaDb.position.findFirst({
             where: {
                 name,
@@ -111,7 +111,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             });
         }
         // check if position already exists
-        console.log("posted data", name);
+     
         const positionexists = await prismaDb.position.findFirst({
             where: {
                 name,
