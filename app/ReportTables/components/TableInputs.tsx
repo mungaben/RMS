@@ -31,7 +31,7 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
     //  value  be between 0 to 5
 
     if (parseInt(e.target.value) >= 0 && parseInt(e.target.value) <= 5) {
-      console.log("value data", e.target.value, typeof e.target.value);
+
 
       const value = e.target.value;
       const time = e.target.id;
@@ -52,7 +52,7 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
           disabled: false,
         },
       ];
-      console.log("dataToAdd b4 manupulating", TableData);
+  
 
       // check if data exists  in TableData by time,systemName,and Timenow  date is today  change that data
 
@@ -67,19 +67,17 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
         } else {
           dataToAdd[0].value = parseInt(value);
         }
-        console.log("data cahnged on changing ", data);
+     
       } else {
         dataToAdd[0].value = parseInt(value);
       }
 
-      console.log("TableData after manpulating", TableData);
+   
 
       //  add data to already existing data   in setTableData add it to the table
       setTableData([...TableData, ...dataToAdd]);
 
-      console.log("after adding", TableData);
-
-      console.log("value from inputs", value, time, systemName);
+   
 
       if (value === "" || (parseInt(value) >= 0 && parseInt(value) <= 5)) {
         setInputValue(value);
