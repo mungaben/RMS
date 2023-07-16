@@ -23,7 +23,7 @@ const DeleteUserData = ({
   item: UserDataDB ;
   mutate: any;
 }) => {
-  const url = `/api/Users/${item.id}`;
+  // const url = `/api/Users/${item.id}`;
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const [setloading, setsetloading] = useState(false);
   const [zonename, setzonename] = useState("");
