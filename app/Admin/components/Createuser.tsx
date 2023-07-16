@@ -27,6 +27,16 @@ import {
 import toast from "react-hot-toast";
 import { z } from "zod";
 
+
+// create  users with the following data posts it to db 
+// create inputs for name,
+                // email,
+                // password: hashedPassword,
+                // role,
+                // region,
+                // clerkid,
+                // position
+
 const Createuser = () => {
   const [loading, setloading] = useState(false);
   const setsystem = useDashboardStore((state) => state.setSystem);
@@ -50,6 +60,7 @@ const Createuser = () => {
       name: "Zone1",
     },
   });
+  
   const Onsubmit = async (data: FormDataschema) => {
 
     const dataPost = {
