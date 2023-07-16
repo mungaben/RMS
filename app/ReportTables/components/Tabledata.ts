@@ -245,3 +245,16 @@ export type TableDataCreateManyInput = {
   TimeNow: Date;
   disabled: boolean;
 };
+
+
+
+
+export type userdata = {
+  name: string;
+  email: string;
+  password: string;
+  role: 'ADMIN'| 'USER';
+  region: 'westernRegion' | 'southernRegion' | 'northEasternRegion' | 'northernRegion' | 'easternRegion' | 'centralRegion' | 'informalSettlements';
+  clerkid: string;
+  position: string;
+};
