@@ -1,23 +1,19 @@
-
 import Basis2Data from "@/app/DashBoard/components/Basis2/Basis2Data";
 import SystemHealthData from "@/app/DashBoard/components/Basis2/TopBar/SystemHealthData";
 import Sytem from "@/app/Details/components/Sytem";
 import {
-    Card,
-    CardContent,
-
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-
-
 
 const MainDash = () => {
   return (
     <>
-      <div className=" flex ">
+      <div className="flex ">
         {/* <Image
           src="/examples/dashboard-light.png"
           width={1280}
@@ -33,18 +29,17 @@ const MainDash = () => {
           className=" dark:block"
         /> */}
       </div>
-      <div className=" flex-col md:flex overflow-hidden">
-      
-        <div className="flex-1 space-y-4 p-8 pt-6 ">
-          {/* <div className="flex items-center justify-between space-y-2  overflow-x-scroll">
+      <div className="flex-col overflow-hidden  md:flex">
+        <div className="flex-1 p-8 pt-6 space-y-4 ">
+          {/* <div className="flex items-center justify-between space-y-2 overflow-x-scroll">
             <h2 className="text-3xl font-bold tracking-tight ">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />
               <Button className="">Download</Button>
             </div>
           </div> */}
-          <Tabs defaultValue="overview" className="space-y-4   ">
-            {/* <TabsList className="flex  overflow-x-scroll">
+          <Tabs defaultValue="overview" className="space-y-4 ">
+            {/* <TabsList className="flex overflow-x-scroll">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="analytics" disabled>
                 Analytics
@@ -60,7 +55,7 @@ const MainDash = () => {
               <SystemHealthData />
 
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4 overflow-scroll  ">
+                <Card className="col-span-4 overflow-scroll ">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
@@ -68,15 +63,13 @@ const MainDash = () => {
                     <Basis2Data />
                   </CardContent>
                 </Card>
-                <Card className="col-span-3  gap-2 overflow-scroll">
+                <Card className="col-span-3 gap-2 overflow-scroll">
                   <CardHeader>
                     <CardTitle>Systems</CardTitle>
-                    <CardDescription>
-                      Important Details
-                    </CardDescription>
+                    <CardDescription>Important Details</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Sytem/>
+                    <Sytem />
                   </CardContent>
                 </Card>
               </div>
@@ -86,11 +79,6 @@ const MainDash = () => {
       </div>
     </>
   );
-}
+};
 
-
-
-
-
-
-export default MainDash
+export default MainDash;
