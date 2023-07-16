@@ -45,7 +45,7 @@ const DeleteUserData = ({
         toast.error(responseClerk.data.error);
       }
       
-      const response = await axios.delete(`/api/Users/${id}`);
+      // const response = await axios.delete(`/api/Users/${id}`);
       mutate();
       // if (isLoading) {
       //   return <div>loading...</div>;
@@ -54,9 +54,9 @@ const DeleteUserData = ({
       //   return <div>loading...</div>;
       // }
       // if data was succesfull mutate will update the data
-      if (response.data.statusbar === "success") {
-        toast.success(response.data.message);
-      }
+      // if (response.data.statusbar === "success") {
+      //   toast.success(response.data.message);
+      // }
 
       // console.log(
       //   "response in delete zone",
@@ -64,9 +64,9 @@ const DeleteUserData = ({
       //   response.data.statusbar
       // );
 
-      if (response.data.statusbar === "error") {
-        toast.error(response.data.error);
-      }
+      // if (response.data.statusbar === "error") {
+      //   toast.error(response.data.error);
+      // }
     } catch (error) {
   
       toast.error("something went wrong");
