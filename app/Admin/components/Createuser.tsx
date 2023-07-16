@@ -27,7 +27,7 @@ import {
 import toast from "react-hot-toast";
 import { z } from "zod";
 
-const createuser = () => {
+const Createuser = () => {
   const [loading, setloading] = useState(false);
   const setsystem = useDashboardStore((state) => state.setSystem);
   const setregion = useRegionStore((state) => state.setRegions);
@@ -133,4 +133,4 @@ const createuser = () => {
   );
 };
 
-export default createuser;
+export default Createuser;

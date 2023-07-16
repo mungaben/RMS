@@ -2,10 +2,14 @@
 
 "use client"
 import React from 'react'
+import Createuser from '../../components/Createuser'
+
 
 const AddUser = () => {
   return (
-    <div>AddUser</div>
+    <div>
+      <Createuser/>
+    </div>
   )
 }
 

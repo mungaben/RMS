@@ -2,10 +2,13 @@
 
 
 import React from 'react'
+import AddUser from './components/AddUser'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <AddUser/>
+    </div>
   )
 }
 
