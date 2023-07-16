@@ -89,7 +89,7 @@ const TableRows = () => {
       "minute"
     );
 
-    const timeDiff = timeDiffs >= -30 && timeDiffs <= 30;
+    const timeDiff = timeDiffs >= -60 && timeDiffs <= 60;
 
    
 

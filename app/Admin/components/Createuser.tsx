@@ -22,55 +22,104 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from "@/components/ui/card";
 import toast from "react-hot-toast";
 import { z } from "zod";
+import { RegionEnum, EnumRegions,Regions, Regions2  } from "@/app/ReportTables/components/TableSettlemets";
+import useSWR from "swr";
+import { useUser } from "@clerk/nextjs";
+import { redirect } from 'next/navigation'
 
 
-// create  users with the following data posts it to db 
+
+// create  users with the following data posts it to db
 // create inputs for name,
-                // email,
-                // password: hashedPassword,
-                // role,
-                // region,
-                // clerkid,
-                // position
+// email,
+// password: hashedPassword,
+// role,
+// region,
+// clerkid,
+// position
+
+// use swr and axios get all positions in api and create an enum of them
+// Define the Position enum
+
 
 const Createuser = () => {
   const [loading, setloading] = useState(false);
   const setsystem = useDashboardStore((state) => state.setSystem);
   const setregion = useRegionStore((state) => state.setRegions);
   const region = useRegionStore((state) => state.regions);
+  const { isLoaded, isSignedIn, user } = useUser();
 
-  const zoneEnum = ["Zone1", "Zone2", "Zone3", "Zone4", "Zone5", "Zone6"] as const;
-  type ZoneEnum = typeof zoneEnum[number];
+
+ 
+
+  // use swr and axios get all positions in api and create an enum of them
+  // fetcher
   
+  const fetcher = (url: string) =>  axios.get(url).then((res) => res.data);
+  
+  const {isLoading,data,error}=useSWR("/api/Users",fetcher)
+
+
+
+ 
+  enum Role {
+    ADMIN = "ADMIN",
+    USER = "USER",
+  }
+
+
+
+  
+
   const FormData = z.object({
-    name: z.enum(zoneEnum).refine(value => value !== undefined, {
-      message: "Please select a valid zone",
-    }),
-  });
+   
+
   
+    role: z.nativeEnum(Role).optional().refine((value) => value !== undefined, {
+      message: "Please select a valid role",
+    }),
+    password: z.string().min(6).max(100).refine((value) => value !== undefined, {
+      message: "Please enter a valid password",
+    }),
+ 
+  
+ 
+  });
+
   type FormDataschema = z.infer<typeof FormData>;
 
   const form = useForm<FormDataschema>({
     resolver: zodResolver(FormData),
     defaultValues: {
-      name: "Zone1",
+      password: "",
+      role: Role.USER,
     },
   });
-  
-  const Onsubmit = async (data: FormDataschema) => {
 
+
+  const Onsubmit = async (data: FormDataschema) => {
+   
+    
+    if(user){
     const dataPost = {
-      name: data.name,
-      regionname: region,
+      name:user.username,
+      email: user.emailAddresses[0].emailAddress,
+      password: data.password,
+      role: data.role,
+      region:region,
+      clerkid: user.id,
+     
     };
 
     try {
       setloading(true);
-      const response = await axios.post("/api/Zones", dataPost);
+     
+      
+      const response = await axios.post("/api/Users", dataPost);
       // console.log(
       //   "response in create zones",
       //   response.data,
@@ -85,61 +134,82 @@ const Createuser = () => {
         toast.error(response.data.error);
       }
     } catch (error) {
-
       toast.error("something went wrong");
     } finally {
-     
       setloading(false);
     }
+  }else{
+    toast.error("please login")
+    redirect('/sign-in')
+  
+  }
   };
-  useEffect(() => {
-
-  }, [region]);
+  useEffect(() => {}, [region]);
 
   return (
-    <div className="w-full  flex flex-col mr-5  ">
-    <Card className=" px-5">
-      <div className="">
-        <CardHeader className="">
-          <SelectRegion />
-        </CardHeader>
-        <CardContent className="py-2 pb-4 space-y-4  w-full">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(Onsubmit)}>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nmae</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={loading}
-                        placeholder="Regionname"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+    <div className="flex flex-col w-full mr-5 ">
+      <Card className="px-5 ">
+        <div className="">
+          <CardHeader className="">
+            <SelectRegion />
+          </CardHeader>
+          <CardContent className="w-full py-2 pb-4 space-y-4">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(Onsubmit)}>
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>password</FormLabel>
+                      <FormControl>
+                        <Input
+                        type="password"
+                          disabled={loading}
+                          placeholder="password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                   <FormField
+                  control={form.control}
+                  name="role"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>password</FormLabel>
+                      <FormControl>
+                        <Input
+                     
+                          disabled={loading}
+                          placeholder="role"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
 
-              <div className="flex items-center justify-end w-full pt-6 space-x-2 ">
-                {/* <Button disabled={loading} variant="outline">
+                <div className="flex items-center justify-end w-full pt-6 space-x-2 ">
+                  {/* <Button disabled={loading} variant="outline">
                   cancel
                 </Button> */}
-                <Button disabled={loading} type="submit" variant="outline">
-                  continue
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </CardContent>
-      </div>
-      <CardFooter>
-        <p>create zones</p>
-      </CardFooter>
-    </Card>
+                  <Button disabled={loading} type="submit" variant="outline">
+                    create
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </CardContent>
+        </div>
+        <CardFooter>
+          <p>create zones</p>
+        </CardFooter>
+      </Card>
     </div>
   );
 };

@@ -205,9 +205,23 @@ export const Regions = [
   "informalSettlements"
 ];
 
+export const Regions2 = [
+  "westernRegion",
+  "southernRegion",
+  "northEasternRegion",
+  "northernRegion",
+  "easternRegion",
+  "centralRegion",
+  "informalSettlements"
+] as const;
+
+
 
 
 export type EnumRegions = "westernRegion" | "southernRegion" | "northEasternRegion" | "northernRegion" | "easternRegion" | "centralRegion" | "informalSettlements";
+
+
+
 
 
 
@@ -219,6 +233,7 @@ export enum RegionEnum {
   EasternRegion = "EasternRegion",
   CentralRegion = "CentralRegion",
   InformalSettlements = "InformalSettlements",
+  NORTHERN = "NORTHERN"
 }
 export const regionsArray: EnumRegions[] = [
   "westernRegion",

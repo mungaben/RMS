@@ -258,3 +258,19 @@ export type userdata = {
   clerkid: string;
   position: string;
 };
+
+
+
+export type UserDataDB = {
+  clerkid: string;
+  createdAt: string;
+  email: string;
+  id: string;
+  myNumber: string | null;
+  name: string;
+  password: string;
+  positionId: string | null;
+  regionId: string;
+  role: "ADMIN" | "USER";
+  updatedAt: string;
+};

@@ -2,13 +2,18 @@ import prismaDb from "@/prisma/prismacli";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 
+export type EnumRegions = "westernRegion" | "southernRegion" | "northEasternRegion" | "northernRegion" | "easternRegion" | "centralRegion" | "informalSettlements";
 
-
-
+const validRegions: string[] = ["westernRegion", "southernRegion", "northEasternRegion", "northernRegion", "easternRegion", "centralRegion", "informalSettlements"];
 // craete a new user
-export default async function POST(req:NextRequest, res: NextResponse) {
+export  async function POST(req:NextRequest, res: NextResponse) {
     const body = await req.json();
-    const { name, email, password, role ,region,clerkid,position} = body;
+    const { name, email, password, role ,region,clerkid} = body;
+    console.log("name",name,"email",email,"password",password,"role",role,"region",region,"clerkid",clerkid);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    console.log("hashedPassword",hashedPassword);
+    
     try {
         if (!name) {
             return NextResponse.json({
@@ -40,6 +45,12 @@ export default async function POST(req:NextRequest, res: NextResponse) {
                 statusbar: 'error',
             });
         }
+        if (!validRegions.includes(region)) {
+            return NextResponse.json({
+              error: 'Invalid region value',
+              statusbar: 'error',
+            });
+          }
         if (!clerkid) {
             return NextResponse.json({
                 error: 'Clerk id is required',
@@ -58,18 +69,32 @@ export default async function POST(req:NextRequest, res: NextResponse) {
             });
         }
         // hash password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+    //    get the regionid
+        const regionid = await prismaDb.region.findFirst({
+            where: {
+                name: region,
+            },
+        });
+        // checxk if region exists
+        if (!regionid) {
+            return NextResponse.json({
+                error: 'Region does not exists',
+                statusbar: 'error',
+            });
+        }
+       
         const result = await prismaDb.user.create({
             data: {
-                name,
-                email,
-                password: hashedPassword,
-                role,
-                region,
-                clerkid,
-                position
-
+                name: name,
+                email: email,
+                password: password,
+                role: role,
+                region:{
+                    connect:{
+                        id:regionid.id
+                    }
+                },
+                clerkid: clerkid,
             },
         });
         return NextResponse.json({
@@ -78,8 +103,9 @@ export default async function POST(req:NextRequest, res: NextResponse) {
             result,
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json({
-            error: 'Something went wrong',
+            error: 'Something went wrong in catch',
             statusbar: 'error',
         });
     }
@@ -89,21 +115,7 @@ export default async function POST(req:NextRequest, res: NextResponse) {
 // get all users
 export async function GET(req:NextRequest, res: NextResponse) {
     try {
-        const users = await prismaDb.user.findMany({
-            select:{
-                id:true,
-                name:true,
-                email:true,
-                role:true,
-                region:true,
-                clerkid:true,
-                createdAt:true,
-                updatedAt:true
-
-
-            }
-
-        });
+        const users = await prismaDb.user.findMany({ });
         return NextResponse.json({
             message: 'Users fetched successfully',
             statusbar: 'success',
