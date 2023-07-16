@@ -21,16 +21,17 @@ model User {
   updatedAt DateTime @updatedAt
   email     String   @unique
   name      String?
-  myNumber  String   @unique
+  myNumber  String ?  @unique
   password  String
 
   Tabledata TableData[]
 
   role       Role     @default(USER)
-  position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
-  positionId String   @db.ObjectId
+  position   Position ? @relation(fields: [positionId], references: [id], onDelete: Cascade)
+  positionId String ?  @db.ObjectId
   region     Region   @relation(fields: [regionId], references: [id], onDelete: Cascade)
   regionId   String   @db.ObjectId
+  clerkid   String   @unique
 }
 
 model Region {
