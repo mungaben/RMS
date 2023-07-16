@@ -1,7 +1,7 @@
 // delete single user
 
 import prismaDb from "@/prisma/prismacli"
-import { clerkClient } from "@clerk/nextjs"
+
 import { NextResponse } from "next/server"
 
 
