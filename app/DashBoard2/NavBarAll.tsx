@@ -12,13 +12,13 @@ import RegionsTeams from './components/RegionsTeams'
 
 const NavBarAll = () => {
   return (
-    <div  className=" flex-col md:flex overflow-hidden">
-          <div className="border-b  overflow-x-scroll ">
-          <div className="flex h-16 items-center px-4">
+    <div  className="flex-col overflow-hidden  md:flex">
+          <div className="overflow-x-scroll border-b ">
+          <div className="flex items-center h-16 px-4">
             <RegionsTeams/>
             <MainNav className="mx-6" />
-            <div className="ml-auto flex items-center space-x-4">
-              <Search />
+            <div className="flex items-center ml-auto space-x-4">
+           
               <UserNav />
             </div>
           </div>
