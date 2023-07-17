@@ -2,7 +2,7 @@
 
 import prismaDb from "@/prisma/prismacli"
 
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
 
 
@@ -10,21 +10,11 @@ type UserId = {
     id: string
 }
 
-
-
-export async function DELETE(res: NextResponse, { params }: { params: UserId }) {
-
-
+export async function DELETE(req:NextRequest,res: NextResponse, { params }: { params: UserId }) {
     // get id 
     const id = params.id
-
-
-
     //  check if id
     try {
-
-
-
         if (!id) {
             return NextResponse.json({
                 message: "id required",
@@ -54,7 +44,8 @@ export async function DELETE(res: NextResponse, { params }: { params: UserId }) 
         if (!DeleteUser) {
             return NextResponse.json({
                 message: "user deelete unsucessfull",
-                statusbar: "error"
+                statusbar: "error",
+                result: DeleteUser
 
             })
         }
@@ -65,19 +56,12 @@ export async function DELETE(res: NextResponse, { params }: { params: UserId }) 
             })
         }
 
-
-
-
-
     } catch (error) {
         return NextResponse.json({
             message: " error in deleting user",
             statusbar: "error"
         })
-
     }
-
-
 }
 
 
