@@ -66,51 +66,51 @@ export async function DELETE(req:NextRequest,res: NextResponse, { params }: { pa
 
 
 // get sigle user by id
-// export async function GET(res: NextResponse, { params }: { params: UserId }) {
-//     // get id 
-//     const id = params.id
+export async function GET(req:NextRequest, res: NextResponse, { params }: { params: UserId }) {
+    // get id 
+    const id = params.id
 
-//     //  check if id
-//     try {
-//         if (!id) {
-//             return NextResponse.json({
-//                 message: "id required",
-//                 statusbar: "error"
-//             })
-//         }
-//         // check if user do exist
-//         const userExists = await prismaDb.user.findUnique({
-//             where: {
-//                 id: id
-//             }
-//         })
+    //  check if id
+    try {
+        if (!id) {
+            return NextResponse.json({
+                message: "id required",
+                statusbar: "error"
+            })
+        }
+        // check if user do exist
+        const userExists = await prismaDb.user.findUnique({
+            where: {
+                id: id
+            }
+        })
 
-//         if (!userExists) {
-//             return NextResponse.json({
-//                 message: " user does not exists",
-//                 redirect: "true",
-//                 statusbar: "error"
-//             })
-//         }
-//         return NextResponse.json({
-//             message: "user found",
-//             statusbar: "success",
-//             result: userExists
-//         })
-
-
-
-//     } catch (error) {
-//         return NextResponse.json({
-//             message: " error in getting user",
-//             statusbar: "error"
-//         })
-
-//     }
+        if (!userExists) {
+            return NextResponse.json({
+                message: " user does not exists",
+                redirect: "true",
+                statusbar: "error"
+            })
+        }
+        return NextResponse.json({
+            message: "user found",
+            statusbar: "success",
+            result: userExists
+        })
 
 
 
-// }
+    } catch (error) {
+        return NextResponse.json({
+            message: " error in getting user",
+            statusbar: "error"
+        })
+
+    }
+
+
+
+}
 
 
 // put single user
