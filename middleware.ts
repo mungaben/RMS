@@ -10,7 +10,7 @@ import { authMiddleware } from "@clerk/nextjs";
 
 // This example protects all routes except for the public routes
 export default authMiddleware({
-  publicRoutes: ["/"],
+  publicRoutes: ["/","/DashBoard2"],
   ignoredRoutes: ["/((?!api|trpc))(_next|.+\..+)(.*)","/"]
 });
 
