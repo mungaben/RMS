@@ -74,6 +74,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
 //   query all data
 export async function GET(req:NextRequest,res:NextResponse){
+
+  try {
+
+
     const result= await prismaDb.tableData.findMany()
 
     
@@ -83,6 +87,17 @@ export async function GET(req:NextRequest,res:NextResponse){
       statusbar:"sucess",
       result 
   })
+    
+  } catch (error) {
+   
+    return NextResponse.json({
+      message: "Error creating records",
+      statusbar:"error"
+    });
+  
+    
+  }
+  
 
 }
 

@@ -26,6 +26,12 @@ export function MainNav({
       >
         Reports
       </Link>
+      <Link
+        href="/"
+        className="hidden text-sm font-medium transition-colors hover:text-primary md:flex"
+      >
+        Home
+      </Link>
       {/* <Link
         href="/"
         className="text-sm font-medium transition-colors text-muted-foreground hover:text-primary"

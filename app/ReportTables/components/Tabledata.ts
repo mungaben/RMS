@@ -234,6 +234,7 @@ export interface PositionDataTypes {
 
 
 export type TableDataCreateManyInput = {
+  Region:string;
   id?: string;
   value: number;
   time: string;

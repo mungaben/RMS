@@ -1,11 +1,18 @@
 import React from 'react'
 import TableDta from '../components/TableDta'
 
-const page = () => {
+type systemparams = {
+  id: string
+}
+
+const page = ({params}:{params:systemparams}) => {
+  console.log(decodeURIComponent(params.id));
+  const systemType = params.id
+  
   return (
-    <div>
+    <div className='flex w-full h-full mx-2'>
       <TableDta params={{
-        id: ''
+        id:decodeURIComponent(params.id)
       }}/>
     </div>
   )
