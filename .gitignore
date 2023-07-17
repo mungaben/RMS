@@ -34,5 +34,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
 .env
 env
+=======
+
+
+.env
+env
+
+>>>>>>> origin/main
