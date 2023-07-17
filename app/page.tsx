@@ -18,6 +18,7 @@ export default function Home() {
   }
   return (
     <main className="">
+      
      <MainDash/>
     </main>
   );
