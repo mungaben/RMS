@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import NavBarAll from "./DashBoard2/NavBarAll";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <NavBarAll />
           {children}
+          <Analytics/>
           <Toaster />
         </body>
       </html>

@@ -14,6 +14,12 @@ export function MainNav({
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
       {...props}
     >
+       <Link
+        href="/Admin"
+        className="hidden text-sm font-medium transition-colors hover:text-primary md:flex"
+      >
+        Admin
+      </Link>
       <Link
         href="/ReportTables"
         className="text-sm font-medium transition-colors hover:text-primary"
