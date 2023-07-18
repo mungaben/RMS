@@ -18,8 +18,9 @@ const SystemSummary: React.FC<AllDtaTableTypes> = ({
   dataAvail,
 }) => {
   // organize data by time posted
-  if (!dataAvail) return <div> <Loading/></div>;
+  
   const datasavailble = useMemo(() => {
+    if (!dataAvail) return <div> <Loading/></div>;
     const dataByTimePosted = dataAvail?.reduce((acc, curr) => {
       const timePosted = curr.time;
       if (!acc[timePosted]) {
