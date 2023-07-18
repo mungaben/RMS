@@ -12,7 +12,7 @@ import RegionsTeams from './components/RegionsTeams'
 
 const NavBarAll = () => {
   return (
-    <div  className="flex-col overflow-hidden  md:flex">
+    <div  className="flex-col z-50 overflow-hidden fixed w-full md:flex shadow-md border border-gray-200">
           <div className="overflow-x-scroll border-b ">
           <div className="flex items-center h-16 px-4">
             <RegionsTeams/>

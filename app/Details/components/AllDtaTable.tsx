@@ -48,6 +48,7 @@ const FormattedDate = (dateString: Date) => {
 
 const AllDtaTable:React.FC<AllDtaTableTypes> = ({systemName,dataAvail}) => {
   return (
+    <ScrollArea className=' overflow-scroll'>
     <Card>
       <CardContent>
     <Table>
@@ -81,6 +82,7 @@ const AllDtaTable:React.FC<AllDtaTableTypes> = ({systemName,dataAvail}) => {
   </Table>
   </CardContent>
   </Card>
+  </ScrollArea>
   )
 }
 

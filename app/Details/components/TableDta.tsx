@@ -55,22 +55,22 @@ const TableDta: React.FC<paramsid> = ({ params }) => {
   // with healthiest
 
   return (
-    <div className="flex flex-col justify-between w-full md:flex-col h-full">
-      <div className="flex-col md:flex-row justify-between h-1/2 w-full">
-        <div className=" md:w-1/2 flex w-full flex-1 ">
+    <div className=" w-full">
+      <div className="  md:flex">
+        <div className="md:w-1/2 ">
           <SystemPipeline systemName={params.id} dataAvail={dataAvail} />
         </div>
-        <div className=" md:w-1/2 flex flex-1 w-full">
+        <div className="md:w-1/2">
           <SystemSummary systemName={params.id} dataAvail={dataAvail} />
         </div>
       </div>
-      <div className="flex-col md:flex-row justify-between h-1/2 w-full">
-        <div className=" md:w-1/2 flex flex-1 w-full">
+      <div className="w-full">
+        <div>
           <AllDtaTable systemName={params.id} dataAvail={dataAvail} />
         </div>
-        <div className=" md:w-1/2 flex flex-1 w-full">
+       {/* <div>
           <PostedBy systemName={params.id} dataAvail={dataAvail} />
-        </div>
+        </div>  */}
       </div>
     </div>
   );

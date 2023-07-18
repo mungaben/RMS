@@ -19,6 +19,8 @@ import {
 import { Progress } from "@/components/ui/progress"
 import * as V from 'victory';
 import { VictoryBar } from 'victory';
+import { ScrollArea } from '@/components/ui/scroll-area'
+import Loading from '../loading'
 
 
 type AllDtaTableTypes={
@@ -30,7 +32,7 @@ type AllDtaTableTypes={
 
 const SystemPipeline:React.FC<AllDtaTableTypes> = ({systemName,dataAvail}) => {
   // organize data by time posted
-  if(!dataAvail) return null
+  if(!dataAvail) return <div> <Loading/></div>
 
 
 // make calulation sless expensive for system
@@ -76,28 +78,25 @@ return dataByTimePostedTotalByTime
   
 
   return (
-    <Card className=' w-full overflow-scroll '>
+    <Card className=' w-full overflow-scroll mx-4 '>
       <CardHeader>
         <CardTitle>System Pipeline</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="flex flex-col space-y-2">
-
-
+      <CardContent className=' bg-green-100  flex flex-col space-y-2 h-full overflow-scroll p-3 mt-3'>
+   
+    
           {
-            Object.entries(datasavailble).map(([time, total]) => 
-            <div className="flex flex-row justify-between" key={time}>
-                <span className='mx-2 text-sm'> 
+            Object.entries(datasavailble).map(([time, total]) =>
+              <div className="flex flex-row justify-between peer hover:text-lg space-x-5" key={time}>
+                <span className='mx-2 text-sm peer hover:text-sm'>
                   {time}
-                  </span>
-                  <Progress value={total*20} className=' bg-red-200 w-full h-2'/> 
-
-
-             </div>
-              
-              )
+                </span>
+                <Progress value={total/dataAvail.length*100}  className={`bg-red-200 w-full h-2 hover:bg-slate-500`}/>
+              </div>
+            )
           }
-          </div>
+      
+   
       </CardContent>
     </Card>
   )
