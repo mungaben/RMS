@@ -20,7 +20,7 @@ const SystemSummary: React.FC<AllDtaTableTypes> = ({
   // organize data by time posted
   
   const datasavailble = useMemo(() => {
-    if (!dataAvail) return <div> <Loading/></div>;
+    
     const dataByTimePosted = dataAvail?.reduce((acc, curr) => {
       const timePosted = curr.time;
       if (!acc[timePosted]) {
@@ -96,10 +96,10 @@ const SystemSummary: React.FC<AllDtaTableTypes> = ({
     },
   };
   // add up all values of datasavailble
-  const total = Object.values(datasavailble).reduce((acc, curr) => {
+  const total = datasavailble && Object.values(datasavailble).reduce((acc, curr) => {
     return acc + curr;
   }, 0);
-  console.log(total);
+  // console.log(total);
 
   return (
     <Card className=" w-full grid relative overflow-scroll">

@@ -32,7 +32,7 @@ type AllDtaTableTypes={
 
 const SystemPipeline:React.FC<AllDtaTableTypes> = ({systemName,dataAvail}) => {
   // organize data by time posted
-  if(!dataAvail) return <div> <Loading/></div>
+  // if(!dataAvail) return <div> <Loading/></div>
 
 
 // make calulation sless expensive for system
@@ -45,7 +45,7 @@ const datasavailble=useMemo(()=>{
     acc[timePosted].push(curr);
     return acc;
   }, {} as { [key: string]: TableDataCreateManyInput[] });
-  console.log(dataByTimePosted);
+  // console.log(dataByTimePosted);
   // from objects in dataByTimePosted add the values  and  craete a new arry with key as time and total added value as value
   const dataByTimePostedTotal = Object.entries(dataByTimePosted).map(
     ([time, data]) => {
