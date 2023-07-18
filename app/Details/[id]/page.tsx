@@ -6,7 +6,7 @@ type systemparams = {
 }
 
 const page = ({params}:{params:systemparams}) => {
-  console.log(decodeURIComponent(params.id));
+  // console.log(decodeURIComponent(params.id));
   const systemType = params.id
   
   return (

@@ -44,7 +44,7 @@ const TableDta: React.FC<paramsid> = ({ params }) => {
       const data = reportdata.result.filter(
         (item: TableDataCreateManyInput) => item.systemName === params.id
       );
-      console.log("data", data);
+      // console.log("data", data);
 
       return data;
     }
@@ -55,8 +55,12 @@ const TableDta: React.FC<paramsid> = ({ params }) => {
   // with healthiest
 
   return (
+
     <div className=" w-full">
+     {dataAvail &&<>
       <div className="  md:flex">
+
+        
         <div className="md:w-1/2 ">
           <SystemPipeline systemName={params.id} dataAvail={dataAvail} />
         </div>
@@ -68,11 +72,13 @@ const TableDta: React.FC<paramsid> = ({ params }) => {
         <div>
           <AllDtaTable systemName={params.id} dataAvail={dataAvail} />
         </div>
-       {/* <div>
-          <PostedBy systemName={params.id} dataAvail={dataAvail} />
-        </div>  */}
+        
+      
       </div>
+      </>
+}
     </div>
+   
   );
 };
 

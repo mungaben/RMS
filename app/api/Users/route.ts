@@ -9,10 +9,10 @@ const validRegions: string[] = ["westernRegion", "southernRegion", "northEastern
 export  async function POST(req:NextRequest, res: NextResponse) {
     const body = await req.json();
     const { name, email, password, role ,region,clerkid} = body;
-    console.log("name",name,"email",email,"password",password,"role",role,"region",region,"clerkid",clerkid);
+    // console.log("name",name,"email",email,"password",password,"role",role,"region",region,"clerkid",clerkid);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    console.log("hashedPassword",hashedPassword);
+    // console.log("hashedPassword",hashedPassword);
     
     try {
         if (!name) {
