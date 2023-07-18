@@ -17,6 +17,8 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
+import * as V from 'victory';
+import { VictoryBar } from 'victory';
 
 
 type AllDtaTableTypes={
@@ -74,7 +76,7 @@ return dataByTimePostedTotalByTime
   
 
   return (
-    <Card className='flex-1 flex-grow w-full'>
+    <Card className=' w-full overflow-scroll '>
       <CardHeader>
         <CardTitle>System Pipeline</CardTitle>
       </CardHeader>
@@ -87,7 +89,9 @@ return dataByTimePostedTotalByTime
             <div className="flex flex-row justify-between" key={time}>
                 <span className='mx-2 text-sm'> 
                   {time}
-                  </span> <Progress value={total*20} color='red'/> 
+                  </span>
+                  <Progress value={total*20} className=' bg-red-200 w-full h-2'/> 
+
 
              </div>
               
