@@ -3,5 +3,10 @@
     "WillLuke.nextjs.hasPrompted": true,
     "githubPullRequests.ignoredPullRequestBranches": [
         "main"
+    ],
+    "cSpell.words": [
+        "dataavil",
+        "reportdata",
+        "Tablelayout"
     ]
 }

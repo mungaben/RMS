@@ -69,7 +69,7 @@ const DetailData = () => {
   return (
     <div>
       <div className="space-y-8">
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <Avatar className="h-9 w-9">
             <AvatarImage src="/avatars/01.png" alt="Avatar" />
             <AvatarFallback>
@@ -86,9 +86,9 @@ const DetailData = () => {
             </p>
           </div>
           <div className="ml-auto font-medium">{dataAvail.Highest.Highest}  <span>total reported</span></div>
-        </div>
+        </div> */}
 
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <Avatar className="h-9 w-9">
             <AvatarImage src="/avatars/01.png" alt="Avatar" />
             <AvatarFallback>
@@ -105,7 +105,7 @@ const DetailData = () => {
             </p>
           </div>
           <div className="ml-auto font-medium">{dataAvail.Highest.lowest} <span>total reported</span></div>
-        </div>
+        </div> */}
       </div>
       <div>
         <AllDatas/>
