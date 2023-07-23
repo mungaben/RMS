@@ -51,7 +51,6 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
           time: time,
           systemName,
           TimeNow: new Date(),
-          disabled: false,
           region:region
         },
       ];

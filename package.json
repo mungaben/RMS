@@ -12,7 +12,7 @@
   "dependencies": {
     "@clerk/nextjs": "^4.21.15",
     "@hookform/resolvers": "^3.1.1",
-    "@prisma/client": "^4.16.2",
+    "@prisma/client": "^5.0.0",
     "@prisma/studio": "^0.487.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.3",
@@ -66,6 +66,6 @@
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
     "@types/bcrypt": "^5.0.0",
-    "prisma": "^4.16.2"
+    "prisma": "^5.0.0"
   }
 }

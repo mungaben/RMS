@@ -18,7 +18,6 @@ export type TableData = {
     value: number
     id ?: number
     TimeNow:Date
-    disabled: boolean
     region:string
 }
 

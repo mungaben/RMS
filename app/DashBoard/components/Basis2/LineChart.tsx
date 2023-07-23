@@ -1,3 +1,6 @@
+
+
+
 import React, { useCallback, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import useSWR from "swr";
@@ -37,7 +40,9 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
     error,
     mutate,
   } = useSWR("/api/Reports", fetcher);
-
+console.log('====================================');
+console.log(reportdata);
+console.log('====================================');
   const fromTimeArray = Object.values(FromTime);
 
   const options = {
@@ -97,10 +102,10 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
       (sum: number, item: TableDataCreateManyInput) => sum + item.value,
       0
     );
-   
+
     const totalTobe = 5 * data.length;
     console.log("total", total, 5 * data.length);
- 
+
     // const totalCeil = Math.ceil(total / data.length); // Round up the average
     timeTotals[time] = total / totalTobe;
   });
@@ -132,6 +137,8 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
       },
     ],
   };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
 
   if (isLoading) return <div>Loading...</div>;
 

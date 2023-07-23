@@ -1,7 +1,8 @@
 
 
-import prismaDb from "@/prisma/prismacli";
 
+
+import prismaDb from "@/prisma/prismacli";
 import { NextRequest, NextResponse } from "next/server";
 
 type Idtype={

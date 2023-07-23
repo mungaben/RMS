@@ -1,6 +1,7 @@
-import prismaDb from "@/prisma/prismacli";
+
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import prismaDb from "@/prisma/prismacli";
 
 export type EnumRegions = "westernRegion" | "southernRegion" | "northEasternRegion" | "northernRegion" | "easternRegion" | "centralRegion" | "informalSettlements";
 

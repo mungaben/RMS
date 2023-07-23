@@ -29,6 +29,8 @@ const TableRows = () => {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, error, isLoading } = useSWR("/api/Reports", fetcher);
 
+  // data && setDisabledButtons(data.result);
+
   const handlePostData = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     const value = (event.target as HTMLInputElement).value;
@@ -89,7 +91,7 @@ const TableRows = () => {
       "minute"
     );
 
-    const timeDiff = timeDiffs >= -60 && timeDiffs <= 60;
+    const timeDiff = timeDiffs >= -60 && timeDiffs <= 90;
 
    
 
@@ -123,8 +125,14 @@ const TableRows = () => {
 
         const dataAvail = await axios.post("/api/Reports", filteredTableData);
    
+        if (dataAvail.data.message ==="success") {
+          toast.success("Saved Successfully");
+        } else {
+          toast.error("Error");
+        }
+  
 
-        toast.success("Saved Successfully");
+       
       } else if (tableDataLength < 9) {
         toast.error("Please Fill All Fields");
       } else {
