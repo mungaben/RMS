@@ -63,28 +63,17 @@ const SystemHealth: React.FC<SystemHealthProps> = ({ System }) => {
   // const TotalValues = filteredData.reduce((total, data) => total + data.someNumberProperty, 0);
 
 
-  const filteredData:TableDataCreateManyInput[]  = useMemo(() => {
-    return tabledatas?.result.filter(
-      (item: TableDataCreateManyInput) => item.Region === region && item.systemName === System
-    ) || [];
-  }, [region, System, tabledatas]);
+  const filteredData = tabledatas?.result.filter(
+    (item: TableDataCreateManyInput) => item.Region === region && item.systemName === System
+  ) || [];
 
-  const expectedValue = useMemo(() => {
-    return filteredData.length * 5;
-  }, [filteredData]);
+  const expectedValue = filteredData.length * 5;
 
-  const totalValues = useMemo(() => {
-    return filteredData.reduce((total,data) => total + (Number(data.value) || 0), 0);
-  }, [filteredData]);
+  const totalValues = filteredData.reduce((total: number, data:TableDataCreateManyInput) => total + (Number(data.value) || 0), 0);
 
-  const remainingData = useMemo(() => {
-    return expectedValue - totalValues;
-  }, [expectedValue, totalValues]);
+  const remainingData = expectedValue - totalValues;
 
-  const percentageDifference = useMemo(() => {
-    return (remainingData / expectedValue) * 100;
-  }, [remainingData, expectedValue]);
- 
+  const percentageDifference = (remainingData / expectedValue) * 100;
 
  let backgroundColor = "green";
 let titlelable = "";
