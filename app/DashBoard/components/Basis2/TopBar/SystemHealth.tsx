@@ -1,16 +1,20 @@
 "use client";
 
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import {
   FromTime,
+  TableDataCreateManyInput,
   TableHeadData,
 } from "@/app/ReportTables/components/Tabledata";
 import useTableStore from "@/app/ReportTables/lib/store/TableStore";
 import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
 import { shallow } from "zustand/shallow";
+import axios from "axios";
+import useSWR from "swr";
+import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 type TableHeadData =
@@ -31,74 +35,103 @@ interface SystemHealthProps {
 const SystemHealth: React.FC<SystemHealthProps> = ({ System }) => {
   const fromTimeArray: FromTime[] = Object.values(FromTime);
   const dashboard = useDashboardStore((state) => state.dashboard);
-  const tabledatas = useTableStore((state) => state.tableRowData);
-  const system = useDashboardStore((state) => state.system);
+  // const tabledatas = useTableStore((state) => state.tableRowData);
+  // const system = useDashboardStore((state) => state.system);
+  const region=useRegionStore((state)=>state.regions)
 
   const tableData = useTableStore((state) => state.tableRowData, shallow);
+  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const {
+    data: tabledatas,
+    error,
+    isLoading,
+  } = useSWR("/api/Reports", fetcher);
 
-  const Basis2Data = useCallback(() => {
-    const basis2DataList = tabledatas?.flatMap((item) => {
-      return item.cells
-        .filter((cell) => cell.name === System)
-        .map((cell) => ({
-          id: item.id,
-          cell: cell,
-        }));
-    });
 
-    return basis2DataList;
-  }, [tabledatas]);
+//  const filteredData: TableDataCreateManyInput[] = tabledatas?.result.filter(
+//     (item: TableDataCreateManyInput) => item.Region===region && item.systemName === System
+//   ) || [];
+
+  // total vcalues 
+  // const totalValuesdata= filteredData.reduce((total, data) => total + data.value, 0);
 
   useEffect(() => {
+    // Fetch data here or perform any other side effects related to 'system'
+  }, [region]);
+
+  // Calculate TotalValues here, based on the 'filteredData'
+  // const TotalValues = filteredData.reduce((total, data) => total + data.someNumberProperty, 0);
+
+
+  const filteredData:TableDataCreateManyInput[]  = useMemo(() => {
+    return tabledatas?.result.filter(
+      (item: TableDataCreateManyInput) => item.Region === region && item.systemName === System
+    ) || [];
+  }, [region, System, tabledatas]);
+
+  const expectedValue = useMemo(() => {
+    return filteredData.length * 5;
+  }, [filteredData]);
+
+  const totalValues = useMemo(() => {
+    return filteredData.reduce((total,data) => total + (Number(data.value) || 0), 0);
+  }, [filteredData]);
+
+  const remainingData = useMemo(() => {
+    return expectedValue - totalValues;
+  }, [expectedValue, totalValues]);
+
+  const percentageDifference = useMemo(() => {
+    return (remainingData / expectedValue) * 100;
+  }, [remainingData, expectedValue]);
  
-    Basis2Data();
-  }, []);
 
-  const basis2DataList = Basis2Data();
-  const labels = fromTimeArray.map((item) => item);
-  const dataavil = labels
-    .map((item) =>
-      basis2DataList
-        .filter((data) => data.id === item)
-        .map((data) => data.cell.value)
-        .flat()
-    )
-    .flat();
+ let backgroundColor = "green";
+let titlelable = "";
 
-  const ExpectedTotals = dataavil.length * 5;
-
-  const TotalValues = dataavil.reduce((a, b) => a + b, 0);
-
-  const remainingData = ExpectedTotals - TotalValues;
-
-  const percentageDifference = (remainingData / ExpectedTotals) * 100;
-
-  let backgroundColor = "green";
-  let titlelable = "";
-  if (percentageDifference > 25) {
-    titlelable = "ok";
-    backgroundColor = "lightgreen";
-  }
-  if (percentageDifference > 50) {
-    titlelable = "warning";
-    backgroundColor = "purple";
-  }
-  if (percentageDifference > 75) {
-    titlelable = "warning";
-    backgroundColor = "brown";
-  } else if (percentageDifference > 10) {
-    titlelable = "warning";
-    backgroundColor = "yellow";
-  } else if (percentageDifference > 5) {
-    titlelable = "working";
-    backgroundColor = "red";
-  }
-
+if (percentageDifference > 90) {
+  titlelable = "critical";
+  backgroundColor = "#FF0000"; // Bright Red
+} else if (percentageDifference > 80) {
+  titlelable = "high";
+  backgroundColor = "#FF4500"; // Orange-Red
+} else if (percentageDifference > 75) {
+  titlelable = "warning";
+  backgroundColor = "#8B0000"; // Dark Red
+} else if (percentageDifference > 60) {
+  titlelable = "alert";
+  backgroundColor = "purple";
+}
+else if (percentageDifference > 50) {
+  titlelable = "moderate";
+  backgroundColor = "#ADFF4F";
+ } else if (percentageDifference > 40) {
+  titlelable = "moderate";
+  backgroundColor = "#ADFF2F"; // Green-Yellow
+} else if (percentageDifference > 30) {
+  titlelable = "info";
+  backgroundColor = "#7FFF00"; // Chartreuse Green
+} else if (percentageDifference > 25) {
+  titlelable = "ok";
+  backgroundColor = "#00FF00"; // Green
+} else if (percentageDifference > 15) {
+  titlelable = "info";
+  backgroundColor = "#00FA9A"; // Medium Spring Green
+} else if (percentageDifference > 10) {
+  titlelable = "working";
+  backgroundColor = "#00FF7F"; // Spring Green
+} else if (percentageDifference > 5) {
+  titlelable = "working";
+  backgroundColor = "#008000"; // Dark Green
+} else {
+  titlelable = "good";
+  backgroundColor = "#006400"; // Dark Green
+}
   const data = {
     labels: [System],
     datasets: [
       {
-        data: [TotalValues, remainingData],
+        data: [totalValues, remainingData],
         backgroundColor: [backgroundColor, "white"],
         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
         borderWidth: 1,
@@ -107,8 +140,8 @@ const SystemHealth: React.FC<SystemHealthProps> = ({ System }) => {
   };
 
   return (
-    <div className=" flex flex-col justify-center items-center   md:mx-5 h-full">
-      <div className=" flex m-auto w-40 ">
+    <div className="flex flex-col items-center justify-center h-full md:mx-5">
+      <div className="flex w-40 m-auto ">
         <Doughnut data={data} />
       </div>
       <div className="">{titlelable}</div>

@@ -1,6 +1,3 @@
-
-
-
 import React, { useCallback, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import useSWR from "swr";
@@ -40,9 +37,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
     error,
     mutate,
   } = useSWR("/api/Reports", fetcher);
-console.log('====================================');
-console.log(reportdata);
-console.log('====================================');
+
   const fromTimeArray = Object.values(FromTime);
 
   const options = {
@@ -70,7 +65,7 @@ console.log('====================================');
   }, [Basis2Data]);
 
   const basis2DataList = Basis2Data();
-  console.log("datalist", basis2DataList);
+  
 
   const labels = fromTimeArray.map((item) => item);
 
@@ -86,7 +81,7 @@ console.log('====================================');
     {} as { [key: string]: TableDataCreateManyInput[] }
   );
   // for each data get total of all data.value
-  console.log("dataavail", dataavil);
+ 
 
   if (!dataavil) {
     return null;
@@ -104,21 +99,19 @@ console.log('====================================');
     );
 
     const totalTobe = 5 * data.length;
-    console.log("total", total, 5 * data.length);
+   
 
     // const totalCeil = Math.ceil(total / data.length); // Round up the average
-    timeTotals[time] = total / totalTobe;
+    timeTotals[time] = total ;
   });
 
-  console.log("timeTotals", timeTotals);
 
   const timeLabels = Object.keys(timeTotals).map((time) =>
     time.split("_")[1].slice(0, 2)
   );
   const timeValues = Object.values(timeTotals);
 
-  console.log("timeLabels", timeLabels);
-  console.log("timeValues", timeValues);
+
 
   // Use the timeTotals to set the data for the LineChart
   const labelsX = Object.keys(timeTotals).map((time) =>
