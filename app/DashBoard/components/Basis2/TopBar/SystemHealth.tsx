@@ -66,9 +66,7 @@ const SystemHealth: React.FC<SystemHealthProps> = ({ System }) => {
   const filteredData = tabledatas?.result.filter(
     (item: TableDataCreateManyInput) => item.Region === region && item.systemName === System
   ) || [];
-  console.log('====================================');
-  console.log(filteredData);
-  console.log('====================================');
+ 
 
   const expectedValue = filteredData.length * 5;
 
