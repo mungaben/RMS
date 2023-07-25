@@ -6,8 +6,10 @@ export default function Home() {
 
   return (
     <main className="">
-      
-     <MainDash/>
+      <div>
+        data changed
+      </div>
+      <MainDash />
     </main>
   );
 }
