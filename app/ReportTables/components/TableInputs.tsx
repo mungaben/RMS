@@ -119,7 +119,7 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
         min="0"
         max="5"
         disabled={inputValue !== "" && parseInt(inputValue) <= 5}
-        className={`${filled && "bg-black text-white"}`}
+        className={`${filled && "bg-black text-white"}  border-spacing-4 border-2 border-black/60 hover:border-black`}
       />
     </>
   );

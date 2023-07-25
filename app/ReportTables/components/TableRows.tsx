@@ -13,6 +13,8 @@ import axios from "axios";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import useSWR from "swr";
+import { Input } from "@/components/ui/input";
+import { useRegionStore } from "../lib/store/RegionStore";
 
 dayjs.extend(customParseFormat);
 
@@ -22,6 +24,8 @@ const TableRows = () => {
   const TableData = useTableDatastore((state) => state.tableData);
   const [disbaled, setdisbaled] = useState(false);
   const [disabledButtons, setDisabledButtons] = useState<string[]>([]);
+  const system = useRegionStore((state) => state.regions);
+
   // from db if db contains data for presnt date from date value with the same key disbale the button
   // if db for new date .getdate() for today has data for the keys then set value of the keys
   //   map it
@@ -34,7 +38,6 @@ const TableRows = () => {
   const handlePostData = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     const value = (event.target as HTMLInputElement).value;
- 
 
     const dataexistindb =
       data &&
@@ -43,10 +46,12 @@ const TableRows = () => {
         const currentDate = new Date();
 
         return (
-          timeNow.getDate() === currentDate.getDate() && data.time === value
+          timeNow.getDate() === currentDate.getDate() &&
+          data.time === value &&
+          data.systemName === system
         );
       });
-   
+
     if (dataexistindb?.length > 0) {
       toast.error("data already posted");
       return;
@@ -56,15 +61,12 @@ const TableRows = () => {
 
     // if value does not exist in DataWithDateToday then post data
 
-   
-  
-
     // from_0900AM
     // get the time from value get the [1] and get the first and second value and last of 2 values
 
     const time = value.split("_")[1].slice(0, 2);
     const AMorPM = value.split("_")[1].slice(4, 6);
-  
+
     const timeValue = time + AMorPM;
     // convert time to date
 
@@ -93,8 +95,6 @@ const TableRows = () => {
 
     const timeDiff = timeDiffs >= -60 && timeDiffs <= 90;
 
-   
-
     // check if time is less  30 or past 30 minutes to current time  crazy logic
     // const timeDiff =Math.abs(parseInt((currenttimeValue- parseInt(formattedTimeValue)).toFixed(2).split('.')[0]))===0
     // const secondpart= Math.abs(parseInt((currenttimeValue- parseInt(formattedTimeValue)).toFixed(2).split('.')[1]))<=30
@@ -121,18 +121,13 @@ const TableRows = () => {
           value,
         ]);
 
-     
-
         const dataAvail = await axios.post("/api/Reports", filteredTableData);
-   
-        if (dataAvail.data.message ==="success") {
+
+        if (dataAvail.data.message === "success") {
           toast.success("Saved Successfully");
         } else {
           toast.error("Error");
         }
-  
-
-       
       } else if (tableDataLength < 9) {
         toast.error("Please Fill All Fields");
       } else {
@@ -151,15 +146,20 @@ const TableRows = () => {
   return (
     <>
       {fromTimeArray.map(([key, value], index) => (
-        <TableRow key={index}>
+        <TableRow key={index} className="">
+          <TableCell className="flex  bg-[#ffff]/40 max-w-[150px]">
+            <Input value={key.split("_")[1]} className="flex" />
+          </TableCell>
           {Object.entries(TablecellObjects).map(
             ([cellkey, cellvalue], index) => (
-              <TableCell key={cellkey}>
-                <TableInputs
-                  id={FromTime[key as keyof typeof FromTime]}
-                  name={cellvalue}
-                />
-              </TableCell>
+              <>
+                <TableCell key={cellkey} className="">
+                  <TableInputs
+                    id={FromTime[key as keyof typeof FromTime]}
+                    name={cellvalue}
+                  />
+                </TableCell>
+              </>
             )
           )}
           <td>

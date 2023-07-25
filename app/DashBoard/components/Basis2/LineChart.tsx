@@ -52,7 +52,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
       },
     },
   };
-
+// data for current region
   const Basis2Data = useCallback(() => {
     const basis2DataList = reportdata?.result?.filter(
       (item: TableDataCreateManyInput) => item.systemName === System

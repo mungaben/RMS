@@ -15,20 +15,20 @@ import TableRows from "./TableRows";
 
 const MyTable = () => {
   return (
-    <Table className=" border-collapse border-l border-slate-500 mt-2 ">
-      <TableCaption>A list of your recent invoices.</TableCaption>
+    <Table className=" border-collapse border-l border-slate-500 mt-2 h-screen w-5/6">
+      <TableCaption>Weekly Table</TableCaption>
       <TableHeader>
-        <TableRow>
+        <TableRow className=" md:my-4 mx-2 md:text-2xl font-semibold ">
+          <TableHead className="">Time</TableHead>
           {TableHeadData.map((item, index) => (
-            <React.Fragment key={index}>
+            <React.Fragment key={index} >
               <TableHead className="">{item}</TableHead>
-              
             </React.Fragment>
           ))}
         </TableRow>
       </TableHeader>
       <TableBody>
-      <TableRows/>
+        <TableRows />
       </TableBody>
     </Table>
   );
