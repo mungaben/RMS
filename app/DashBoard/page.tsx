@@ -1,5 +1,5 @@
 import React from "react";
-import Basis2Data from "./components/Basis2/Basis2Data";
+import Basis2Data from "./components/Basis2/LineChartData";
 import SystemHealth from "./components/Basis2/TopBar/SystemHealth";
 import TopBarHealth from "./components/Basis2/TopBar/TopBarHealth";
 
