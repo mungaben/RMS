@@ -7,7 +7,7 @@ import DeleteUser from './components/DeleteUser'
 
 const page = () => {
   return (
-    <div>
+    <div className=' mt-16'>
       <div>
       <AddUser/>
       </div>
