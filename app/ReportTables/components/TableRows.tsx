@@ -1,20 +1,23 @@
 "use client";
 
-import { TableCell, TableRow } from "@/components/ui/table";
-import React, { useState } from "react";
-import { TableDataCreateManyInput, TablecellObjects } from "./Tabledata";
-import TableInputs from "./TableInputs";
-import { FromTime } from "./Tabledata";
 import { Button } from "@/components/ui/button";
-import useTableStore from "../lib/store/TableStore";
-import { useTableDatastore } from "../lib/store/TableDatastore";
-import toast from "react-hot-toast";
+import { Input } from "@/components/ui/input";
+import { TableCell, TableRow } from "@/components/ui/table";
 import axios from "axios";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 import useSWR from "swr";
-import { Input } from "@/components/ui/input";
 import { useRegionStore } from "../lib/store/RegionStore";
+import { useTableDatastore } from "../lib/store/TableDatastore";
+import useTableStore from "../lib/store/TableStore";
+import TableInputs from "./TableInputs";
+import {
+  FromTime,
+  TableDataCreateManyInput,
+  TablecellObjects,
+} from "./Tabledata";
 
 dayjs.extend(customParseFormat);
 
@@ -35,73 +38,54 @@ const TableRows = () => {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, error, isLoading } = useSWR("/api/Reports", fetcher);
 
-  const DataFromDb=data?.result
+  const DataFromDb = data?.result;
   DataFromDb &&
-  function getFilteredData(DataFromDb: TableDataCreateManyInput[]): TableDataCreateManyInput[] {
-    const currentDate = new Date();
-    const filteredData = DataFromDb.filter((item) => {
-      const timeNow = new Date(item.TimeNow);
-  
-      // Check if the time is on the same day as the current date
-      const isSameDay =
-        timeNow.getDate() === currentDate.getDate() &&
-        timeNow.getMonth() === currentDate.getMonth() &&
-        timeNow.getFullYear() === currentDate.getFullYear();
-        console.log('====================================');
-  console.log("is same day",isSameDay);
-  console.log('====================================');
-  
-      return isSameDay;
-    });
-  
-    return filteredData;
-  }
+    function getFilteredData(
+      DataFromDb: TableDataCreateManyInput[]
+    ): TableDataCreateManyInput[] {
+      const currentDate = new Date();
+      const filteredData = DataFromDb.filter((item) => {
+        const timeNow = new Date(item.TimeNow);
 
+        // Check if the time is on the same day as the current date
+        const isSameDay =
+          timeNow.getDate() === currentDate.getDate() &&
+          timeNow.getMonth() === currentDate.getMonth() &&
+          timeNow.getFullYear() === currentDate.getFullYear();
 
+        return isSameDay;
+      });
 
-  function isValueDisabled(value:any, disabledButtons: string | any[]) {
-    console.log('====================================');
-    console.log("is value disabled",value,disabledButtons);
-    console.log('====================================');
+      return filteredData;
+    };
+
+  function isValueDisabled(value: any, disabledButtons: string | any[]) {
     // if value exists in db and is in disabledButtons then return true
-    // data in db 
-    data&&
-    console.log('====================================');
-    console.log("data in db",data?.result);
-    console.log('====================================');
+    // data in db
 
     const dataexistindb1 =
-    data &&
-    data?.result?.some((data: TableDataCreateManyInput) => {
-      const timeNow = new Date(data.TimeNow);
-      const currentDate = new Date();
-      const today=currentDate.getTime()
+      data &&
+      data?.result?.some((data: TableDataCreateManyInput) => {
+        const timeNow = new Date(data.TimeNow);
+        const currentDate = new Date();
+        const today = currentDate.getTime();
 
-
-  
-
-  
-      return (
-        timeNow.getDate() === currentDate.getDate() && data.time === value && data.systemName === system
-      );
-    });
+        return (
+          timeNow.getDate() === currentDate.getDate() &&
+          data.time === value &&
+          data.systemName === system
+        );
+      });
     // if no value in datadoes exist in db then return false
     // if value exists in db and is in disabledButtons then return true
     // const valueExistsInDB = dataexistindb1?.some((data:TableDataCreateManyInput) => data.time === value && data.systemName === system);
-    
-const dataexistindb = dataexistindb1;
-    console.log('====================================');
-    console.log( "does it exists",dataexistindb1,"includes in values",typeof(dataexistindb1), disabledButtons.includes(value));
-    console.log('====================================');
+
+    const dataexistindb = dataexistindb1;
+ 
     return disabledButtons.includes(value) && dataexistindb1;
   }
 
-
   // data && setDisabledButtons(data.result);
-
-
-
-
 
   const handlePostData = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -124,7 +108,6 @@ const dataexistindb = dataexistindb1;
       toast.error("data already posted");
       return;
     }
-    
 
     // if value exists in  DataWithDateToday  then toast errori
 
@@ -218,14 +201,14 @@ const dataexistindb = dataexistindb1;
   return (
     <>
       {fromTimeArray.map(([key, value], index) => (
-        <TableRow key={index} className="">
-          <TableCell className="flex  bg-[#ffff]/40 max-w-[150px] my-4">
+        <TableRow key={index} className=" bg-muted/20 w-full">
+          <TableCell className="flex    max-w-[150px] my-4">
             <Input value={key.split("_")[1]} className="flex" />
           </TableCell>
           {Object.entries(TablecellObjects).map(
             ([cellkey, cellvalue], index) => (
               <>
-                <TableCell key={cellkey} className="">
+                <TableCell key={cellkey} className="   ">
                   <TableInputs
                     id={FromTime[key as keyof typeof FromTime]}
                     name={cellvalue}
@@ -234,16 +217,13 @@ const dataexistindb = dataexistindb1;
               </>
             )
           )}
-          <td>
+          <td className=" ">
             <Button
               onClick={handlePostData}
               disabled={isValueDisabled(key, disabledButtons) || isLoading}
               value={key}
             >
-              {
-                disabledButtons.includes(key) ? "Post" : "Save"
-              }
-            
+              {disabledButtons.includes(key) ? "Post" : "Save"}
             </Button>
           </td>
         </TableRow>
