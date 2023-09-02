@@ -5,10 +5,6 @@ import {
 } from "@/app/ReportTables/components/Tabledata";
 import useTableStore from "@/app/ReportTables/lib/store/TableStore";
 import { useMemo, useState } from "react";
-import { TableRow } from "@/components/ui/table";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { da } from "date-fns/locale";
-import { set } from "date-fns";
 import AllDatas from "../AllDatas";
 
 const DetailData = () => {

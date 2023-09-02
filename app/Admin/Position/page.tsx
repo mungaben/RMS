@@ -4,7 +4,7 @@ import DeletePosition from './components/DeletePosition'
 
 const page = () => {
   return (
-    <div>
+    <div className='mt-16'>
       <div>
         <AddPosition/>
       </div>

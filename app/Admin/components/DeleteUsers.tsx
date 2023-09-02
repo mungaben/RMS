@@ -4,29 +4,17 @@
 "use client";
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 
+import { UserDataDB } from "@/app/ReportTables/components/Tabledata";
 import useSWR from "swr";
-import { UserDataDB, Zoneapi } from "@/app/ReportTables/components/Tabledata";
 
 import {
   Table,
   TableBody,
-  TableCaption,
-  TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
-import DeleteZoneNameData from "./DeleteZoneNameData";
 import DeleteUsersData from "./DeleteUsersData";
 
 export const url = "/api/Users";

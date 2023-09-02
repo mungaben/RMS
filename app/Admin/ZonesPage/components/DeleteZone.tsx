@@ -1,28 +1,19 @@
 "use client";
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 
-import useSWR from "swr";
 import { Zoneapi } from "@/app/ReportTables/components/Tabledata";
+import useSWR from "swr";
 import DeleteData from "./DeleteData";
 
 import {
   Table,
   TableBody,
-  TableCaption,
-  TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
 
 export const url = "/api/Zones";

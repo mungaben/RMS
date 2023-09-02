@@ -5,16 +5,12 @@
 
 "use client";
 
-import TableData from "@/app/ReportTables/components/TableData";
-import { UserDataDB, Zoneapi } from "@/app/ReportTables/components/Tabledata";
+import { UserDataDB } from "@/app/ReportTables/components/Tabledata";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { TableCell, TableRow } from "@/components/ui/table";
-import { clerkClient } from "@clerk/nextjs";
+import { TableCell } from "@/components/ui/table";
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import useSWR from "swr";
 
 const DeleteUserData = ({
   item,

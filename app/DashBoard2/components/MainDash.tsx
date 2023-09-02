@@ -1,4 +1,4 @@
-import Basis2Data from "@/app/DashBoard/components/Basis2/Basis2Data";
+import Basis2Data from "@/app/DashBoard/components/Basis2/LineChartData";
 import SystemHealthData from "@/app/DashBoard/components/Basis2/TopBar/SystemHealthData";
 import Sytem from "@/app/Details/components/Sytem";
 import {

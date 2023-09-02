@@ -9,7 +9,7 @@ import DeleteeRegion from './components/DeleteeRegion'
 
 const page = () => {
   return (
-    <div>
+    <div className=' mt-16'>
       <div>
         <CreateRegion/>
       </div>

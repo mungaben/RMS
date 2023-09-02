@@ -7,7 +7,7 @@ import DeleteZone from './components/DeleteZone'
 
 const page = () => {
   return (
-    <div className='flex flex-col flex-grow'>
+    <div className='flex flex-col flex-grow mt-16'>
         <div className=' flex   flex-grow'>
         <AddZones/>
         </div>

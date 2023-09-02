@@ -24,12 +24,11 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import toast from "react-hot-toast";
-import { z } from "zod";
-import { RegionEnum, EnumRegions,Regions, Regions2  } from "@/app/ReportTables/components/TableSettlemets";
-import useSWR from "swr";
 import { useUser } from "@clerk/nextjs";
-import { redirect } from 'next/navigation'
+import { redirect } from 'next/navigation';
+import toast from "react-hot-toast";
+import useSWR from "swr";
+import { z } from "zod";
 
 
 
@@ -61,7 +60,7 @@ const Createuser = () => {
   
   const fetcher = (url: string) =>  axios.get(url).then((res) => res.data);
   
-  const {isLoading,data,error}=useSWR("/api/Users",fetcher)
+  const {isLoading,data,error,mutate}=useSWR("/api/Users",fetcher)
 
 
 
@@ -128,6 +127,7 @@ const Createuser = () => {
 
       if (response.data.statusbar === "success") {
         toast.success(response.data.message);
+        
       }
 
       if (response.data.statusbar === "error") {
@@ -207,7 +207,7 @@ const Createuser = () => {
           </CardContent>
         </div>
         <CardFooter>
-          <p>create zones</p>
+          <p>create users</p>
         </CardFooter>
       </Card>
     </div>

@@ -15,10 +15,10 @@ import TableRows from "./TableRows";
 
 const MyTable = () => {
   return (
-    <Table className=" border-collapse border-l border-slate-500 mt-2 h-screen w-5/6">
-      <TableCaption>Weekly Table</TableCaption>
+    <Table className="w-11/12 mt-2 border-l border-collapse h-[450px] border-slate-500">
+      <TableCaption>Daily Report</TableCaption>
       <TableHeader>
-        <TableRow className=" md:my-4 mx-2 md:text-2xl font-semibold ">
+        <TableRow className="mx-2 font-semibold md:my-4 md:text-2xl">
           <TableHead className="">Time</TableHead>
           {TableHeadData.map((item, index) => (
             <React.Fragment key={index} >
@@ -27,7 +27,7 @@ const MyTable = () => {
           ))}
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="mx-2 ">
         <TableRows />
       </TableBody>
     </Table>

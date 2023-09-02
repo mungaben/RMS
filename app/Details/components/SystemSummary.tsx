@@ -1,10 +1,9 @@
 "use client";
 import { TableDataCreateManyInput } from "@/app/ReportTables/components/Tabledata";
-import React, { useMemo } from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Loading from "../loading";
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
+import React, { useMemo } from "react";
+import { Doughnut } from "react-chartjs-2";
 
 type AllDtaTableTypes = {
   systemName: string;
