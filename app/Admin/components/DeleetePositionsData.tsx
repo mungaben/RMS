@@ -6,11 +6,9 @@
 
 "use client";
 
-import TableData from "@/app/ReportTables/components/TableData";
-import { PositionDataTypes, RegionDataTypes, Zoneapi } from "@/app/ReportTables/components/Tabledata";
+import { PositionDataTypes } from "@/app/ReportTables/components/Tabledata";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { TableCell, TableRow } from "@/components/ui/table";
+import { TableCell } from "@/components/ui/table";
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";

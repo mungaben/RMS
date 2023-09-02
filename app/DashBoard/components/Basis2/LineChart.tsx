@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import useSWR from "swr";
-import axios from "axios";
-import {
-  Chart,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
 import {
   FromTime,
   TableDataCreateManyInput,
 } from "@/app/ReportTables/components/Tabledata";
+import axios from "axios";
+import {
+  CategoryScale,
+  Chart,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
+} from "chart.js";
+import React, { useCallback, useEffect } from "react";
+import { Line } from "react-chartjs-2";
+import useSWR from "swr";
 Chart.register(
   CategoryScale,
   LinearScale,
