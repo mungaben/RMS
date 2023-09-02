@@ -3,16 +3,13 @@
 "use client"
 
 
-import React from 'react'
-import TeamSwitcher from './components/team-switcher'
-import { MainNav } from './components/main-nav'
-import { Search } from './components/search'
-import { UserNav } from './components/user-nav'
 import RegionsTeams from './components/RegionsTeams'
+import { MainNav } from './components/main-nav'
+import { UserNav } from './components/user-nav'
 
 const NavBarAll = () => {
   return (
-    <div  className="flex-col z-50 overflow-hidden fixed w-full md:flex shadow-md border border-gray-200">
+    <div  className="flex-col z-50 overflow-hidden fixed w-full md:flex shadow-md border-none border-gray-200 ">
           <div className="overflow-x-scroll border-b ">
           <div className="flex items-center h-16 px-4">
             <RegionsTeams/>

@@ -1,4 +1,4 @@
-"use client";
+
 
 "use client";
 import { Input } from "@/components/ui/input";
@@ -112,8 +112,8 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
         max="5"
         disabled={inputValue !== "" && parseInt(inputValue) <= 5}
         className={`${
-          filled && "bg-black text-white"
-        }  border-spacing-4 border-2 border-black/60 hover:border-black my-4`}
+          filled && " "
+        }  border-spacing-4 border-1 border-accent-foreground  hover:border-black/20 my-4 `}
       />
     </>
   );
