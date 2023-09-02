@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   Select,
@@ -10,21 +10,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import {
-  EnumRegions,
-  Regions,
-  zoneEnum,
-} from "@/app/ReportTables/components/TableSettlemets";
-import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
-import { useZoneStore } from "@/app/ReportTables/lib/store/Zonestore";
-import useSWR from "swr";
-import axios from "axios";
 import { Zoneapi } from "@/app/ReportTables/components/Tabledata";
 import {
-  ZoneName,
-  useZoneNameStore,
+  useZoneNameStore
 } from "@/app/ReportTables/lib/store/ZoneNameStore";
-import { Button } from "@/components/ui/button";
+import { useZoneStore } from "@/app/ReportTables/lib/store/Zonestore";
+import axios from "axios";
+import useSWR from "swr";
 
 const SelectZoneData = () => {
   const url = "/api/Zones";

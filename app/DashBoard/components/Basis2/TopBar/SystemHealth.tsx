@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
 import {
   FromTime,
   TableDataCreateManyInput,
   TableHeadData,
 } from "@/app/ReportTables/components/Tabledata";
-import useTableStore from "@/app/ReportTables/lib/store/TableStore";
-import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
-import { shallow } from "zustand/shallow";
-import axios from "axios";
-import useSWR from "swr";
 import { useRegionStore } from "@/app/ReportTables/lib/store/RegionStore";
+import useTableStore from "@/app/ReportTables/lib/store/TableStore";
+import axios from "axios";
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import useSWR from "swr";
+import { shallow } from "zustand/shallow";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 type TableHeadData =

@@ -26,6 +26,8 @@ const TableRows = () => {
   const [disabledButtons, setDisabledButtons] = useState<string[]>([]);
   const system = useRegionStore((state) => state.regions);
 
+  const setTableData = useTableDatastore((state) => state.setTableData);
+
   // from db if db contains data for presnt date from date value with the same key disbale the button
   // if db for new date .getdate() for today has data for the keys then set value of the keys
   //   map it
@@ -33,7 +35,73 @@ const TableRows = () => {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, error, isLoading } = useSWR("/api/Reports", fetcher);
 
+  const DataFromDb=data?.result
+  DataFromDb &&
+  function getFilteredData(DataFromDb: TableDataCreateManyInput[]): TableDataCreateManyInput[] {
+    const currentDate = new Date();
+    const filteredData = DataFromDb.filter((item) => {
+      const timeNow = new Date(item.TimeNow);
+  
+      // Check if the time is on the same day as the current date
+      const isSameDay =
+        timeNow.getDate() === currentDate.getDate() &&
+        timeNow.getMonth() === currentDate.getMonth() &&
+        timeNow.getFullYear() === currentDate.getFullYear();
+        console.log('====================================');
+  console.log("is same day",isSameDay);
+  console.log('====================================');
+  
+      return isSameDay;
+    });
+  
+    return filteredData;
+  }
+
+
+
+  function isValueDisabled(value:any, disabledButtons: string | any[]) {
+    console.log('====================================');
+    console.log("is value disabled",value,disabledButtons);
+    console.log('====================================');
+    // if value exists in db and is in disabledButtons then return true
+    // data in db 
+    data&&
+    console.log('====================================');
+    console.log("data in db",data?.result);
+    console.log('====================================');
+
+    const dataexistindb1 =
+    data &&
+    data?.result?.some((data: TableDataCreateManyInput) => {
+      const timeNow = new Date(data.TimeNow);
+      const currentDate = new Date();
+      const today=currentDate.getTime()
+
+
+  
+
+  
+      return (
+        timeNow.getDate() === currentDate.getDate() && data.time === value && data.systemName === system
+      );
+    });
+    // if no value in datadoes exist in db then return false
+    // if value exists in db and is in disabledButtons then return true
+    // const valueExistsInDB = dataexistindb1?.some((data:TableDataCreateManyInput) => data.time === value && data.systemName === system);
+    
+const dataexistindb = dataexistindb1;
+    console.log('====================================');
+    console.log( "does it exists",dataexistindb1,"includes in values",typeof(dataexistindb1), disabledButtons.includes(value));
+    console.log('====================================');
+    return disabledButtons.includes(value) && dataexistindb1;
+  }
+
+
   // data && setDisabledButtons(data.result);
+
+
+
+
 
   const handlePostData = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -56,6 +124,7 @@ const TableRows = () => {
       toast.error("data already posted");
       return;
     }
+    
 
     // if value exists in  DataWithDateToday  then toast errori
 
@@ -93,7 +162,7 @@ const TableRows = () => {
       "minute"
     );
 
-    const timeDiff = timeDiffs >= -60 && timeDiffs <= 90;
+    const timeDiff = timeDiffs >= -200 && timeDiffs <= 200;
 
     // check if time is less  30 or past 30 minutes to current time  crazy logic
     // const timeDiff =Math.abs(parseInt((currenttimeValue- parseInt(formattedTimeValue)).toFixed(2).split('.')[0]))===0
@@ -125,6 +194,9 @@ const TableRows = () => {
 
         if (dataAvail.data.message === "success") {
           toast.success("Saved Successfully");
+          setdisbaled(false);
+          setDisabledButtons([]);
+          setTableData([]);
         } else {
           toast.error("Error");
         }
@@ -147,7 +219,7 @@ const TableRows = () => {
     <>
       {fromTimeArray.map(([key, value], index) => (
         <TableRow key={index} className="">
-          <TableCell className="flex  bg-[#ffff]/40 max-w-[150px]">
+          <TableCell className="flex  bg-[#ffff]/40 max-w-[150px] my-4">
             <Input value={key.split("_")[1]} className="flex" />
           </TableCell>
           {Object.entries(TablecellObjects).map(
@@ -165,10 +237,13 @@ const TableRows = () => {
           <td>
             <Button
               onClick={handlePostData}
-              disabled={disabledButtons.includes(key) || isLoading}
+              disabled={isValueDisabled(key, disabledButtons) || isLoading}
               value={key}
             >
-              Save
+              {
+                disabledButtons.includes(key) ? "Post" : "Save"
+              }
+            
             </Button>
           </td>
         </TableRow>

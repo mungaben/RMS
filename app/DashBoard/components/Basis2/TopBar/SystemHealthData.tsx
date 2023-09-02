@@ -1,10 +1,9 @@
 "use client";
 
-import { TableHeadData } from "@/app/ReportTables/components/Tabledata";
-import React from "react";
-import SystemHealth from "./SystemHealth";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
+import { TableHeadData } from "@/app/ReportTables/components/Tabledata";
+import { Card, CardContent } from "@/components/ui/card";
+import SystemHealth from "./SystemHealth";
 type TableHeadData =
   | "Basis2"
   | "INTERFACE"

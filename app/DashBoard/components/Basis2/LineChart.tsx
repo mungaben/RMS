@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import useSWR from "swr";
-import axios from "axios";
-import {
-  Chart,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
 import {
   FromTime,
   TableDataCreateManyInput,
 } from "@/app/ReportTables/components/Tabledata";
+import axios from "axios";
+import {
+  CategoryScale,
+  Chart,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
+} from "chart.js";
+import React, { useCallback, useEffect } from "react";
+import { Line } from "react-chartjs-2";
+import useSWR from "swr";
 Chart.register(
   CategoryScale,
   LinearScale,
@@ -52,7 +52,7 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
       },
     },
   };
-// data for current region
+  // data for current region
   const Basis2Data = useCallback(() => {
     const basis2DataList = reportdata?.result?.filter(
       (item: TableDataCreateManyInput) => item.systemName === System
@@ -65,7 +65,6 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
   }, [Basis2Data]);
 
   const basis2DataList = Basis2Data();
-  
 
   const labels = fromTimeArray.map((item) => item);
 
@@ -81,7 +80,6 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
     {} as { [key: string]: TableDataCreateManyInput[] }
   );
   // for each data get total of all data.value
- 
 
   if (!dataavil) {
     return null;
@@ -99,19 +97,15 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
     );
 
     const totalTobe = 5 * data.length;
-   
 
     // const totalCeil = Math.ceil(total / data.length); // Round up the average
-    timeTotals[time] = total ;
+    timeTotals[time] = total;
   });
-
 
   const timeLabels = Object.keys(timeTotals).map((time) =>
     time.split("_")[1].slice(0, 2)
   );
   const timeValues = Object.values(timeTotals);
-
-
 
   // Use the timeTotals to set the data for the LineChart
   const labelsX = Object.keys(timeTotals).map((time) =>

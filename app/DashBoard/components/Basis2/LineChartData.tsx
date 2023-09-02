@@ -1,10 +1,7 @@
 "use client";
-import useTableStore from "@/app/ReportTables/lib/store/TableStore";
-import React from "react";
+import { useDashboardStore } from "../../lib/store/Dashboardstore";
 import LineChart from "./LineChart";
 import TopBar from "./TopBar";
-import { useDashboardStore } from "../../lib/store/Dashboardstore";
-import SystemHealth from "@/app/DashBoard/components/Basis2/TopBar/SystemHealth";
 
 const Basis2Data = () => {
   const system = useDashboardStore((state) => state.system);
