@@ -1,9 +1,9 @@
-import useSWR from "swr";
+// import useSWR from "swr";
 
-// fetcher
+// // fetcher
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const { isLoading, data, error, mutate } = useSWR("/api/Users", fetcher);
+// const { isLoading, data, error, mutate } = useSWR("/api/Users", fetcher);
 
-export { isLoading, data, error, mutate };
+// export { isLoading, data, error, mutate };
