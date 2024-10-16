@@ -6,16 +6,11 @@ import Dashboard from "./components/DashBoardComp/Dashboard";
 import MainDash from "../DashBoard2/components/MainDash";
 
 const page = () => {
-  return <div className=" w-full h-screen bg-red-300">
-   
-    {/* <div className=" ">
-    <CreateZonesDrop/>
-    </div>
-    <div className=" ">
-    <CreateZoneDropNames/>
-    </div> */}
-    <MainDash/>
-    
+  return <div className=" w-full h-screen  bg-gradient-to-r from-indigo-700 via-blue-700 to-blue-300 ">
+
+
+    <MainDash />
+
   </div>;
 };
 

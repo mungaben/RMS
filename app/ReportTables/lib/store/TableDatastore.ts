@@ -11,13 +11,13 @@ import { create } from "zustand";
 // store data with user /not must ,time-default now,id time -enum of fromTime,system name ,value
 // Tabledata interface
 export type TableData = {
+    Region ?:string,
     user ?: string,
     time: string,
     systemName: string,
     value: number
     id ?: number
     TimeNow:Date
-    disabled: boolean
     region:string
 }
 

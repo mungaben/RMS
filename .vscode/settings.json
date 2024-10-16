@@ -1,4 +1,16 @@
 {
     "WillLuke.nextjs.addTypesOnSave": true,
-    "WillLuke.nextjs.hasPrompted": true
+    "WillLuke.nextjs.hasPrompted": true,
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main",
+        "main"
+    ],
+    "cSpell.words": [
+        "dataavil",
+        "dataexistindb",
+        "prismacli",
+        "reportdata",
+        "tabledatas",
+        "Tablelayout"
+    ]
 }

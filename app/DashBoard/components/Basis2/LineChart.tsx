@@ -1,18 +1,22 @@
-"use client";
 import {
-  Chart as ChartJS,
+  FromTime,
+  TableDataCreateManyInput,
+} from "@/app/ReportTables/components/Tabledata";
+import axios from "axios";
+import {
   CategoryScale,
+  Chart,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
-
+import React, { useCallback, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-
-ChartJS.register(
+import useSWR from "swr";
+Chart.register(
   CategoryScale,
   LinearScale,
   PointElement,
@@ -21,25 +25,20 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-import React, { useCallback, useEffect, useState } from "react";
-import { SystemModule, faker } from "@faker-js/faker";
-import { string } from "zod";
-import useTableStore from "@/app/ReportTables/lib/store/TableStore";
-import { FromTime } from "@/app/ReportTables/components/Tabledata";
-import { useDashboardStore } from "../../lib/store/Dashboardstore";
-
-import { shallow } from "zustand/shallow";
 interface LineChartProps {
   System: string;
 }
 
 const LineChart: React.FC<LineChartProps> = ({ System }) => {
-  // console.log("system in line chart", System);
-  
-  const fromTimeArray: FromTime[] = Object.values(FromTime);
-  const dashboard = useDashboardStore((state) => state.dashboard);
-  const tabledatas=useTableStore((state) => state.tableRowData);
+  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const {
+    data: reportdata,
+    isLoading,
+    error,
+    mutate,
+  } = useSWR("/api/Reports", fetcher);
+
+  const fromTimeArray = Object.values(FromTime);
 
   const options = {
     responsive: true,
@@ -53,58 +52,83 @@ const LineChart: React.FC<LineChartProps> = ({ System }) => {
       },
     },
   };
-
-  const tableData = useTableStore((state) => state.tableRowData);
+  // data for current region
   const Basis2Data = useCallback(() => {
-    const basis2DataList = tabledatas?.flatMap((item) => {
-      return item.cells
-        .filter((cell) => cell.name === System)
-        .map((cell) => ({
-          id: item.id,
-          cell: cell,
-        }));
-    });
-    // console.log("basis2DataList from tablestore in Linecharts", basis2DataList);
-    
-
+    const basis2DataList = reportdata?.result?.filter(
+      (item: TableDataCreateManyInput) => item.systemName === System
+    );
     return basis2DataList;
-  },[System]);
+  }, [System, reportdata?.result]);
 
-
-  // console.log(basis2DataList);
-  
   useEffect(() => {
-    // console.log("time set in the graph", dashboard);
-      Basis2Data();
-  }, [System]);
+    Basis2Data();
+  }, [Basis2Data]);
 
- const basis2DataList =Basis2Data();
+  const basis2DataList = Basis2Data();
+
   const labels = fromTimeArray.map((item) => item);
-  const dataavil = labels
-    .map((item) =>
-      basis2DataList
-        .filter((data) => data.id === item)
-        .map((data) => data.cell.value)
-        .flat()
-    )
-    .flat();
 
-  // console.log(dataavil);
+  const dataavil = reportdata?.result?.reduce(
+    (acc: { [x: string]: any[] }, curr: { time: any }) => {
+      const timePosted = curr.time;
+      if (!acc[timePosted]) {
+        acc[timePosted] = [];
+      }
+      acc[timePosted].push(curr);
+      return acc;
+    },
+    {} as { [key: string]: TableDataCreateManyInput[] }
+  );
+  // for each data get total of all data.value
+
+  if (!dataavil) {
+    return null;
+  }
+
+  // Explicitly tell TypeScript the type of dataavil
+  const dataavilTyped: { [key: string]: TableDataCreateManyInput[] } = dataavil;
+
+  // Calculate the total of all data.value for each time
+  const timeTotals: { [key: string]: number } = {};
+  Object.entries(dataavilTyped).forEach(([time, data]) => {
+    const total = data.reduce(
+      (sum: number, item: TableDataCreateManyInput) => sum + item.value,
+      0
+    );
+
+    const totalTobe = 5 * data.length;
+
+    // const totalCeil = Math.ceil(total / data.length); // Round up the average
+    timeTotals[time] = total;
+  });
+
+  const timeLabels = Object.keys(timeTotals).map((time) =>
+    time.split("_")[1].slice(0, 2)
+  );
+  const timeValues = Object.values(timeTotals);
+
+  // Use the timeTotals to set the data for the LineChart
+  const labelsX = Object.keys(timeTotals).map((time) =>
+    time.split("_")[1].slice(0, 2)
+  );
 
   const data = {
-    labels:labels.map((item) => item.toLocaleLowerCase().slice(5)),
+    labels: labelsX,
     datasets: [
       {
         label: System,
-        data: dataavil,
+        data: Object.values(timeTotals), // Use the rounded-up totals as data
         borderColor: "green",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
-
         borderWidth: 0.5,
       },
     ],
   };
- 
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <div className="h-full w-full text-sm md:flex flex-1">
       <Line options={options} data={data} />

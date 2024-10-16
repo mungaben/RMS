@@ -8,6 +8,7 @@ import { EnumRegions } from '../../components/TableSettlemets';
 
 
 type RegionStore = {
+   
     regions:  EnumRegions;
     setRegions: (regions: EnumRegions) => void;
 

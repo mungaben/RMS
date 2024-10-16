@@ -1,9 +1,9 @@
 "use client";
 
+import { useDashboardStore } from "@/app/DashBoard/lib/store/Dashboardstore";
 import { TableHeadData } from "@/app/ReportTables/components/Tabledata";
-import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import SystemHealth from "./SystemHealth";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 type TableHeadData =
   | "Basis2"
   | "INTERFACE"
@@ -16,15 +16,16 @@ type TableHeadData =
   | "Exchange BrowserMail";
 
 const TopBarHealthData = () => {
+  const system = useDashboardStore((state) => state.system);
   return (
-    <div className="flex overflow-scroll space-x-4 justify-start">
+    <div className="flex justify-start mt-10 space-x-4 overflow-scroll ">
       {TableHeadData?.map((item: TableHeadData, index: number) => (
-        <Card className="flex justify-center flex-col" key={index}>
+        <Card className="flex flex-col justify-center" key={index}>
           {/* <CardHeader className="flex flex-row items-center justify-between space-y-0">
-            <CardTitle className="text-sm font-medium justify-center flex">{item}</CardTitle>
+            <CardTitle className="flex justify-center text-sm font-medium">{item}</CardTitle>
           </CardHeader> */}
           <CardContent>
-            <div className=" font-bold">
+            <div className="font-bold ">
               <SystemHealth System={item} />
             </div>
           </CardContent>

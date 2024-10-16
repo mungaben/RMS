@@ -1,4 +1,4 @@
-"use client";
+
 
 "use client";
 import { Input } from "@/components/ui/input";
@@ -25,7 +25,7 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
   const [filled, setfilled] = useState(false);
   const setTableData = useTableDatastore((state) => state.setTableData);
   const TableData = useTableDatastore((state) => state.tableData);
-  const region=useRegionStore(state=>state.regions);
+  const region = useRegionStore((state) => state.regions);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // check if value is either 0 ,=5 or five if it is continue else retun none
@@ -33,8 +33,6 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
     //  value  be between 0 to 5
 
     if (parseInt(e.target.value) >= 0 && parseInt(e.target.value) <= 5) {
-
-
       const value = e.target.value;
       const time = e.target.id;
       const systemName = e.target.name;
@@ -51,11 +49,9 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
           time: time,
           systemName,
           TimeNow: new Date(),
-          disabled: false,
-          region:region
+          region: region,
         },
       ];
-  
 
       // check if data exists  in TableData by time,systemName,and Timenow  date is today  change that data
 
@@ -70,39 +66,34 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
         } else {
           dataToAdd[0].value = parseInt(value);
         }
-     
       } else {
         dataToAdd[0].value = parseInt(value);
       }
 
-   
-
       //  add data to already existing data   in setTableData add it to the table
       setTableData([...TableData, ...dataToAdd]);
-
-   
 
       if (value === "" || (parseInt(value) >= 0 && parseInt(value) <= 5)) {
         setInputValue(value);
 
-        const updatedRowData = tablerowData.map((row) => {
-          if (row.id === id) {
-            const updatedCells = row.cells.map((cell) => {
-              if (cell.name === name) {
-                return { ...cell, value: Number(value) };
-              }
-              return cell;
-            });
+        // const updatedRowData = tablerowData.map((row) => {
+        //   if (row.id === id) {
+        //     const updatedCells = row.cells.map((cell) => {
+        //       if (cell.name === name) {
+        //         return { ...cell, value: Number(value) };
+        //       }
+        //       return cell;
+        //     });
 
-            return { ...row, cells: updatedCells };
-          }
+        //     return { ...row, cells: updatedCells };
+        //   }
 
-          return row;
-        });
+        //   return row;
+        // });
 
-        setRowData(updatedRowData);
+        // setRowData(updatedRowData);
 
-        setCellData(updatedRowData.flatMap((row) => row.cells));
+        // setCellData(updatedRowData.flatMap((row) => row.cells));
       }
     } else {
       toast.error("Please enter a number between 0 to 5");
@@ -120,7 +111,9 @@ const TableInputs: React.FC<TableInputsProps> = ({ id, name }) => {
         min="0"
         max="5"
         disabled={inputValue !== "" && parseInt(inputValue) <= 5}
-        className={`${filled && "bg-black text-white"}`}
+        className={`${
+          filled && " "
+        }  border-spacing-4 border-1 border-accent-foreground  hover:border-black/20 my-4 `}
       />
     </>
   );

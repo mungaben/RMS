@@ -1,6 +1,7 @@
 import { type } from 'os';
-import prismaDb from '../../../../prisma/prismacli';
+
 import { NextRequest, NextResponse } from 'next/server';
+import prismaDb from '@/prisma/prismacli';
 
 type ZoneName = {
     id: string;

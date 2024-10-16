@@ -10,7 +10,7 @@ import DEleteZoneName from './components/DEleteZoneName'
 
 const page = () => {
   return (
-    <div>
+    <div className='mt-16'>
       <div>
         <CreateZoneNames/>
       </div>
